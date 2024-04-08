@@ -1,9 +1,9 @@
-import { useInbursaContextHook } from "@/Context/InbursaContext";
-import { CalcularTaxa } from "@/compontents/AllBanksCalc/calculated";
+import { useInbursaContextHook } from "../../../Context/InbursaContext";
+import { CalcularTaxa } from "../../../compontents/AllBanksCalc/calculated";
 import { C6DataSystem, InbursaDataSystem, PagbankDataSystem } from "../../AllBanksCalc/calculatedDtsys";
-import { saldoDataSyst, saldoReal } from "@/types/SaldoReal/saldoReal";
-import { BoxInput, TextInput } from "@/utils/formBox/boxInput";
-import { FormBox } from "@/utils/formBox/formBox";
+import { saldoDataSyst, saldoReal } from "../../../types/SaldoReal/saldoReal";
+import { BoxInput, TextInput } from "./../../../utils/formBox/boxInput";
+import { FormBox } from "../../../utils/formBox/formBox";
 import {
   Box,
   Button,
