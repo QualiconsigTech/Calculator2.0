@@ -32,7 +32,6 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import qualiconsi from "../../../../public/qualiconsi.png";
-import { ModalComponent } from "@/utils/modalBox/modal";
 import { FaBuilding, FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 
