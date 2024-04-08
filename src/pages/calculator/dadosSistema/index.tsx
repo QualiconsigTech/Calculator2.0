@@ -1,7 +1,7 @@
 
-import { RealBalance } from "@/compontents/calculatorSide/DataSistema";
-import { BalanceDataSystem } from "@/compontents/calculatorSide/SaldoReal";
-import { Portabilidade } from "@/compontents/resultSide/Portabilidade";
+import { RealBalance } from "../../../compontents/calculatorSide/DataSistema";
+import { BalanceDataSystem } from "../../../compontents/calculatorSide/SaldoReal";
+import { Portabilidade } from "../../../compontents/resultSide/Portabilidade";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 export default function Calculator () {
