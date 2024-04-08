@@ -2,11 +2,14 @@
 
 Calcula todos os dados de bancos
 
-## Distintivos
+## Resumo
 
-Adicione distintivos para indicar o status do seu projeto, como build, cobertura de testes, versão do projeto, etc. Você pode gerar distintivos dinâmicos usando o shields.io.
+Projeto em construção que visa deixar o trabalho mais dinamico e fluido
 
-Exemplo:
+## Bancos e taxas
+[Inbursa, Pagbank, C6]
+
+
 
 ![Build Status](https://img.shields.io/github/workflow/status/seu-usuario/seu-projeto/Build%20&%20Test)
 ![Coverage](https://img.shields.io/codecov/c/github/seu-usuario/seu-projeto)
