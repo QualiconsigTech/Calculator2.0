@@ -10,14 +10,12 @@ import {
   Flex,
   Input,
   Text,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export const BalanceDataSystem = () => {
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
   const {inbursatax, setInbursaTax} = useInbursaContextHook()
 
   const {
