@@ -1,6 +1,6 @@
-# Meu Projeto Git
+# Calculadora Geral
 
-Descrição curta do seu projeto.
+Calcula todos os dados de bancos
 
 ## Distintivos
 
@@ -20,10 +20,12 @@ Exemplo:
 - [Licença](#licença)
 
 ## Instalação
-
-Forneça instruções claras sobre como instalar o seu projeto. Você pode incluir comandos para instalação via npm, pip, ou instruções para clonar o repositório.
-
-Exemplo:
-
 ```bash
-npm install meu-projeto
+npm install 
+yarn
+```
+## Rodar
+```bash
+npm run dev
+yarn run dev
+
