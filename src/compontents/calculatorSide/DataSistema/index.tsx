@@ -17,7 +17,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 export const RealBalance = () => {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
-  const {inbursatax, setInbursaTax} = useInbursaContextHook()
+  const { inbursatax, setInbursaTax } = useInbursaContextHook();
 
   const {
     register,
@@ -25,24 +25,39 @@ export const RealBalance = () => {
     formState: { errors },
   } = useForm<any>();
   const [formData, setFormData] = useState<saldoReal>();
-  const [taxaResponse, setTaxaResponse] = useState<number>()
-  const onSubmit: SubmitHandler<any> = async (data:saldoReal) => {
+  const [taxaResponse, setTaxaResponse] = useState<number>();
+  const onSubmit: SubmitHandler<any> = async (data: saldoReal) => {
     setFormData(data);
-
   };
 
   const FormReceived = () => {
-    const InbursaResponse = CalculadoraInbursa(formData?.ValorParcelaAtual, formData?.PrazoRestante, formData?.VlEmprestimo)
-    const PagBankResponse = CalculadoraPagBank(formData?.ValorParcelaAtual, formData?.PrazoRestante, formData?.VlEmprestimo)
-    const C6Response = CalculadoraC6(formData?.ValorParcelaAtual, formData?.PrazoRestante, formData?.VlEmprestimo)
-    const taxaResponse = CalcularTaxa(formData?.ValorParcelaAtual, formData?.PrazoRestante, formData?.VlEmprestimo)
-    setInbursaTax({InbursaResponse, PagBankResponse, C6Response})
-    setTaxaResponse(taxaResponse)
-  }
+    const InbursaResponse = CalculadoraInbursa(
+      formData?.ValorParcelaAtual,
+      formData?.PrazoRestante,
+      formData?.VlEmprestimo
+    );
+    const PagBankResponse = CalculadoraPagBank(
+      formData?.ValorParcelaAtual,
+      formData?.PrazoRestante,
+      formData?.VlEmprestimo
+    );
+    const C6Response = CalculadoraC6(
+      formData?.ValorParcelaAtual,
+      formData?.PrazoRestante,
+      formData?.VlEmprestimo
+    );
+    const taxaResponse = CalcularTaxa(
+      formData?.ValorParcelaAtual,
+      formData?.PrazoRestante,
+      formData?.VlEmprestimo
+    );
+    setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
+    setTaxaResponse(taxaResponse);
+  };
 
-  useEffect(()=> {
-    FormReceived()
-  },[formData])
+  useEffect(() => {
+    FormReceived();
+  }, [formData]);
 
   return (
     <Flex
@@ -51,7 +66,7 @@ export const RealBalance = () => {
       align={"center"}
       flex={1}
       h={isMobile ? "auto" : "100vh"}
-      bg={"#F5F5F5"}
+      bg={"#f5f5f5"}
       p={4}
     >
       <Box mb={5}>
@@ -62,12 +77,20 @@ export const RealBalance = () => {
       </Box>
       <Flex mb={20} justify={"center"} gap={10}>
         <Link href="saldoReal">
-          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
+          <Button
+            bg={"#201658"}
+            color={"white"}
+            _hover={{ bg: "#3F3D56" }}
+          >
             Saldo Real
           </Button>
         </Link>
         <Link href="dadosSistema">
-          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
+          <Button
+            bg={"#201658"}
+            color={"white"}
+            _hover={{ bg: "#3F3D56" }}
+          >
             Dados Sistema
           </Button>
         </Link>

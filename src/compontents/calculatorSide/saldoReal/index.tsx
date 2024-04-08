@@ -29,7 +29,6 @@ export const BalanceDataSystem = () => {
   const [taxaResponse, setTaxaResponse] = useState<number>()
   const onSubmit: SubmitHandler<any> = async (data:saldoDataSyst) => {
     setFormData(data);
-    
   };
 
   const FormReceived = () => {
@@ -39,8 +38,6 @@ export const BalanceDataSystem = () => {
     const taxaResponse = CalcularTaxa(formData?.ParcelaAtual, formData?.prazoInicial, formData?.ValorEmprestimoContratado)
     setInbursaTax({InbursaResponse, PagBankResponse, C6Response})
     setTaxaResponse(taxaResponse)
-   
-    console.log('esse', inbursatax)
   }
 
   useEffect(()=> {
@@ -53,32 +50,32 @@ export const BalanceDataSystem = () => {
       justify={"center"}
       align={"center"}
       flex={1}
-      h={isMobile ? "auto" : "100vh"}
+      minHeight={"100vh"}
       bg={"#F5F5F5"}
       p={4}
     >
       <Box mb={5}>
-        <Text fontWeight={"600"} fontSize={["17px"]}>
+        <Text fontWeight={"600"} fontSize={["lg", "xl"]} textAlign="center">
           Simulação calculadora
         </Text>
-        <Text>Preencher dados somente em amarelo</Text>
+        <Text fontSize={["sm", "md"]} textAlign="center">Preencher dados somente em amarelo</Text>
       </Box>
       <Flex mb={20} justify={"center"} gap={10}>
         <Link href="saldoReal">
-          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
+          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }} fontSize={["sm", "md"]}>
             Saldo Real
           </Button>
         </Link>
         <Link href="dadosSistema">
-          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
+          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }} fontSize={["sm", "md"]}>
             Dados Sistema
           </Button>
         </Link>
       </Flex>
-      <Box bg={"#FFFFFF"} p={10} borderRadius={10} boxShadow={"md"} w={"100%"}>
+      <Box bg={"#FFFFFF"} p={[4, 6]} borderRadius={10} boxShadow={"md"} w={"100%"}>
         <Flex justify={"center"} align={"center"}>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
             <FormBox>
               <BoxInput>
                 <TextInput>Prazo inicial</TextInput>
@@ -164,7 +161,7 @@ export const BalanceDataSystem = () => {
                {formData?.ValorEmprestimoContratado }
                 </Flex>
               </BoxInput>
-              <Button type="submit">Calcular</Button>
+              <Button type="submit" alignSelf="flex-end">Calcular</Button>
             </FormBox>
           </form>
 

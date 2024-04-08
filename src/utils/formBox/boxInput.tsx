@@ -14,6 +14,6 @@ export const TextInput = ({children}:any) => {
 
 
     return (
-        <Text mb={10} fontSize={['1rm', '1.1rm']}>{children}</Text>
+        <Text mb={10} fontSize={["11px","13px", '15px', '17px']}>{children}</Text>
     )
 }
