@@ -69,7 +69,7 @@ export const Portabilidade = () => {
       formattedData.sort((a, b) => a.tax - b.tax);
 
       setOrdenedList(formattedData);
-      console.log("this", formattedData);
+      console.log("this", inbursatax);
     }
   }, [inbursatax]);
 
@@ -106,6 +106,7 @@ export const Portabilidade = () => {
             color={!selectedBank ? "blue.400" : "white"}
             cursor="pointer"
             onClick={() => handleBankSelect(null)}
+            fontWeight={650}
           >
             Todos
           </ListItem>
@@ -113,13 +114,15 @@ export const Portabilidade = () => {
             color={selectedBank === "Inbursa" ? "purple" : "white"}
             cursor="pointer"
             onClick={() => handleBankSelect("Inbursa")}
+            fontWeight={650}
           >
             Inbursa
           </ListItem>
           <ListItem
-            color={selectedBank === "Pagbank" ? "green.400" : "white"}
+            color={selectedBank === "Pagbank" ? "#037416" : "white"}
             cursor="pointer"
             onClick={() => handleBankSelect("Pagbank")}
+            fontWeight={650}
           >
             Pagbank
           </ListItem>
@@ -127,6 +130,7 @@ export const Portabilidade = () => {
             color={selectedBank === "C6" ? "black" : "white"}
             cursor="pointer"
             onClick={() => handleBankSelect("C6")}
+            fontWeight={650}
           >
             C6
           </ListItem>

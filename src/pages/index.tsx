@@ -26,7 +26,7 @@ export default function Home() {
           background: 'blue.600',
           color:'gray.700'
         }}>
-          <Link href={'/calculator'}>Calculadora</Link>
+          <Link href={'/calculator/dadosSistema'}>Calculadora</Link>
         </Button>
       </Flex>
     </Flex>

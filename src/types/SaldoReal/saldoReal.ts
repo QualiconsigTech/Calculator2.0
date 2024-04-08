@@ -4,3 +4,10 @@ export interface saldoReal {
  VlEmprestimo: number,
  SaldoDevedor: number
 }
+
+export interface saldoDataSyst {
+  ParcelaAtual: number, 
+  ValorEmprestimoContratado: number,
+  prazoInicial: number,
+  parcelasPagas: number,
+ }
