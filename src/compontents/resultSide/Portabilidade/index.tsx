@@ -25,7 +25,6 @@ import {
   Thead,
   Tr,
   VStack,
-  color,
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -83,7 +82,7 @@ export const Portabilidade = () => {
       case "C6":
         return "#1e1e20";
       default:
-        return color;
+        return "white";
     }
   };
 
@@ -97,10 +96,6 @@ export const Portabilidade = () => {
     setSelectedRow(row);
     onOpen();
   };
-
-  function handleModalClose(): void {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <Flex flex={2} flexDir={"column"} bg={"#98ABEE"} color={"white"} p={4}>
@@ -284,24 +279,24 @@ export const Portabilidade = () => {
             </ModalBody>
             <ModalFooter justifyContent="center">
               <Flex gap={3}>
-                <Flex alignItems={'center'} gap={2}>
-                  <Icon as={FaPhoneAlt} textAlign={'center'}/>
-                  <Text color={'black'} textAlign={'center'} fontWeight={650}>Contato</Text>
-                  <Text textAlign={'center'}>0800-888-5842</Text>
+                <Flex alignItems={"center"} gap={2}>
+                  <Icon as={FaPhoneAlt} textAlign={"center"} />
+                  <Text color={"black"} textAlign={"center"} fontWeight={650}>
+                    Contato
+                  </Text>
+                  <Text textAlign={"center"}>0800-888-5842</Text>
                 </Flex>
-                <Flex gap={2} alignItems={'center'}>
-                  <Icon as={MdOutlineMail} textAlign={'center'}/>
-                  <Text textAlign={'center'}>Contato</Text>
+                <Flex gap={2} alignItems={"center"}>
+                  <Icon as={MdOutlineMail} textAlign={"center"} />
+                  <Text textAlign={"center"}>Contato</Text>
                   <Text>contato@qualiconsig.com.br</Text>
                 </Flex>
-                <Flex gap={2} alignItems={'center'}>
-                  <Icon as={FaBuilding}/>
-                  <Text textAlign={'center'}>CNPJ</Text>
-                  <Text textAlign={'center'}>27.733.374/0001-72</Text>
+                <Flex gap={2} alignItems={"center"}>
+                  <Icon as={FaBuilding} />
+                  <Text textAlign={"center"}>CNPJ</Text>
+                  <Text textAlign={"center"}>27.733.374/0001-72</Text>
                 </Flex>
-                 
               </Flex>
-              
             </ModalFooter>
           </Box>
         </ModalContent>
