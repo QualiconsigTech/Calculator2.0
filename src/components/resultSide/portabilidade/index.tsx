@@ -190,7 +190,7 @@ export const Portabilidade = ({taxa}:any) => {
                     </Flex>
                 </Td>
                 <Td>
-                    {item.tax.toFixed(2)} <Icon as={FaPercent} />
+                    {item.tax.toFixed(2)} <Icon fontSize={'12px'} as={FaPercent} />
                 </Td>
                 <Td>
                     <Flex align="center">
