@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export function RealBalance() {
+export function RealBalance({taxaares}:any) {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const { inbursatax, setInbursaTax } = useInbursaContextHook();
 
@@ -55,6 +55,7 @@ export function RealBalance() {
     );
     setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
     setTaxaResponse(taxaResponse);
+    taxaares(taxaResponse)
   };
 
   useEffect(() => {
