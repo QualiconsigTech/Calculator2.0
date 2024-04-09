@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export function BalanceDataSystem() {
+export function BalanceDataSystem({taxaatual}:any) {
   const {inbursatax, setInbursaTax} = useInbursaContextHook()
 
   const {
@@ -38,6 +38,7 @@ export function BalanceDataSystem() {
     const taxaResponse = CalcularTaxa(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!))
     setInbursaTax({InbursaResponse, PagBankResponse, C6Response})
     setTaxaResponse(taxaResponse)
+    taxaatual(taxaResponse)
   }
 
   useEffect(()=> {

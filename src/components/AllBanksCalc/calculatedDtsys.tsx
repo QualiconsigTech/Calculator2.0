@@ -21,6 +21,7 @@ export const InbursaDataSystem = (
     parcelaAtual,
     parcelaRestante,
     SaldoDevedor,
+    parcelasPagas
   };
 };
 
@@ -45,6 +46,7 @@ export const PagbankDataSystem = (
     parcelaAtual,
     parcelaRestante,
     SaldoDevedor,
+    parcelasPagas
   };
 };
 
@@ -69,5 +71,6 @@ export const C6DataSystem = (
     parcelaAtual,
     parcelaRestante,
     SaldoDevedor,
+    parcelasPagas
   };
 };

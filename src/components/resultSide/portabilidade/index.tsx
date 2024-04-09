@@ -31,10 +31,12 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import qualiconsi from "../../../../public/qualiconsi.png";
-import { FaBuilding, FaPhoneAlt } from "react-icons/fa";
+import { FaBuilding, FaPercent, FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
+import { TbCurrencyReal } from "react-icons/tb";
+import { PiBankFill } from "react-icons/pi";
 
-export const Portabilidade = () => {
+export const Portabilidade = ({taxa}:any) => {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const { inbursatax } = useInbursaContextHook();
   const [ordenedList, setOrdenedList] = useState<any[]>([]);
@@ -61,6 +63,7 @@ export const Portabilidade = () => {
             parcelaAtual: element.parcelaAtual,
             parcelaRestante: element.parcelaRestante,
             saldoDevedor: element.SaldoDevedor,
+            parcelasPagas: element.parcelasPagas,
           };
           formattedData.push(obj);
         }
@@ -70,6 +73,7 @@ export const Portabilidade = () => {
 
       setOrdenedList(formattedData);
       console.log("this", inbursatax);
+      console.log('dd', selectedRow)
     }
   }, [inbursatax]);
 
@@ -94,6 +98,7 @@ export const Portabilidade = () => {
 
   const handleRowClick = (row: any) => {
     setSelectedRow(row);
+    console.log(row)
     onOpen();
   };
 
@@ -169,30 +174,48 @@ export const Portabilidade = () => {
               .filter((item) => !selectedBank || item.nameBank === selectedBank) // Filtro baseado no banco selecionado
               .map((item, index) => (
                 <Tr
-                  key={index}
-                  cursor="pointer"
-                  onClick={() => handleRowClick(item)}
-                  transition={"all ease 0.2s"}
-                  _hover={{
+                key={index}
+                cursor="pointer"
+                onClick={() => handleRowClick(item)}
+                transition="all ease 0.2s"
+                _hover={{
                     background: getRowColor(item.nameBank),
                     color: "white",
-                  }}
-                >
-                  <Td>{item.nameBank}</Td>
-                  <Td>{item.tax.toFixed(2)}</Td>
-                  <Td>{FormatedNumber(item.pmt)}</Td>
-                  <Td>{FormatedNumber(item.parcelaAtual - item.pmt)}</Td>
-                  <Td>
-                    {FormatedNumber(
-                      (item.parcelaAtual - item.pmt) * item.parcelaRestante
-                    )}
-                  </Td>
-                </Tr>
+                }}
+            >
+                <Td>
+                    <Flex align="center">
+                        <Icon as={PiBankFill} mr={2} />
+                        {item.nameBank}
+                    </Flex>
+                </Td>
+                <Td>
+                    {item.tax.toFixed(2)} <Icon as={FaPercent} />
+                </Td>
+                <Td>
+                    <Flex align="center">
+                        <Icon as={TbCurrencyReal} mr={2} />
+                        {FormatedNumber(item.pmt)}
+                    </Flex>
+                </Td>
+                <Td>
+                    <Flex align="center">
+                        <Icon as={TbCurrencyReal} mr={2} />
+                        {FormatedNumber(item.parcelaAtual - item.pmt)}
+                    </Flex>
+                </Td>
+                <Td>
+                    <Flex align="center">
+                        <Icon as={TbCurrencyReal} mr={2} />
+                        {FormatedNumber((item.parcelaAtual - item.pmt) * item.parcelaRestante)}
+                    </Flex>
+                </Td>
+            </Tr>
               ))}
           </Tbody>
         )}
       </Table>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />
         <ModalContent
           borderRadius={"14px"}
@@ -218,65 +241,81 @@ export const Portabilidade = () => {
             <ModalBody>
               <Grid templateColumns={"repeat(3, 1fr)"} gap={6}>
                 <GridItem>
-                  <Box p={4} borderRadius={"lg"} bg={"white"} boxShadow={"md"}>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Contrato Atual
-                    </Text>
-                    <Text fontSize="lg">{selectedRow?.parcelaAtual}</Text>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Parcela Atual
-                    </Text>
-                    <Text fontSize="lg">{selectedRow?.parcelaAtual}</Text>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Saldo Devedor
-                    </Text>
-                    <Text fontSize="lg">{selectedRow?.saldoDevedor}</Text>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Saldo Devedor Aprox.
-                    </Text>
-                    <Text fontSize="lg">{selectedRow?.saldoDevedor}</Text>
+                  <Box bg={'blue.500'} color={'white'} p={2}>
+                    <Box>
+                      <Text fontSize={'xl'} fontWeight={'650'}>Contrato Atual</Text>
+                    </Box>
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Parcela atual :</Text>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.parcelaAtual.toFixed(2) }</Flex>
+                    </Flex>
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Taxa atual contrato :</Text>
+                      <Flex gap={2} align="center" flex={1}><Icon as={FaPercent} fontSize={'12px'}/>{taxa}</Flex>
+                    </Flex>
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Saldo devedor aproximado :</Text>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor.toFixed(2)}</Flex>
+                    </Flex>
+                    {selectedRow?.parcelaPagas &&
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Parcelas restantes :</Text>
+                      <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante - selectedRow?.parcelasPagas}</Flex>
+                    </Flex>
+                    }
+                    {selectedRow?.parcelaPagas === undefined &&
+                      <Flex gap={2} mt={2} mb={2}>
+                        <Text flex={2} fontSize={'14px'}>Parcelas restantes :</Text>
+                        <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante}</Flex>
+                     </Flex>
+                    }
                   </Box>
                 </GridItem>
                 <GridItem>
-                  <Box p={4} borderRadius={"lg"} bg={"white"} boxShadow={"md"}>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Nova Taxa
-                    </Text>
-                    <Text fontSize="lg">{selectedRow?.tax}</Text>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Nova Parcela
-                    </Text>
-                    <Text fontSize="lg">{selectedRow?.pmt}</Text>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Parcela restante:
-                    </Text>
-                    <Text fontSize="lg">{selectedRow?.parcelaRestante}</Text>
+                <Box bg={'blue.500'} color={'white'} p={2}>
+                    <Box>
+                      <Text fontSize={'xl'} fontWeight={'650'}>Novo contrato</Text>
+                    </Box>
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text flex={2} fontSize={'14px'}>Parcela atual :</Text>
+                      <Flex gap={2}  align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.pmt}</Flex>
+                    </Flex>
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text flex={2} fontSize={'14px'}>Taxa atual contrato :</Text>
+                      <Flex gap={2} align="center"  flex={1}><Icon as={FaPercent} fontSize={'12px'}/>{selectedRow?.tax}</Flex>
+                    </Flex>
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text flex={2} fontSize={'14px'}>Saldo devedor aproximado :</Text>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor}</Flex>
+                    </Flex>
+                    {selectedRow?.parcelaPagas &&
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Parcelas restantes :</Text>
+                      <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante - selectedRow?.parcelasPagas}</Flex>
+                    </Flex>
+                    }
+                    {selectedRow?.parcelaPagas === undefined &&
+                      <Flex gap={2} mt={2} mb={2}>
+                        <Text flex={2} fontSize={'14px'}>Parcelas restantes :</Text>
+                        <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante}</Flex>
+                     </Flex>
+                    }
                   </Box>
                 </GridItem>
                 <GridItem>
-                  <Box p={4} borderRadius={"lg"} bg={"white"} boxShadow={"md"}>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Economia do cliente
-                    </Text>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Economia Mensal:
-                    </Text>
-                    <Text fontSize="lg" color={"#07e05a"} fontWeight={"bold"}>
-                      R${" "}
-                      {(selectedRow?.parcelaAtual - selectedRow?.pmt).toFixed(
-                        2
-                      )}
-                    </Text>
-                    <Text fontSize="xl" fontWeight="bold">
-                      Economia Total:
-                    </Text>
-                    <Text fontSize="lg" color={"#07e05a"} fontWeight={"bold"}>
-                      R${" "}
-                      {(
-                        (selectedRow?.parcelaAtual - selectedRow?.pmt) *
-                        selectedRow?.parcelaRestante
-                      ).toFixed(2)}
-                    </Text>
+                <Box bg={'blue.500'} color={'white'} p={2}>
+                    <Box>
+                      <Text fontSize={'xl'} fontWeight={'650'}>Economia do cliente</Text>
+                    </Box>
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Economia Mensal :</Text>
+                      <Flex align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.parcelaAtual - selectedRow?.pmt)} </Flex>
+                    </Flex>
+                    <Flex gap={2}  mb={2}>
+                      <Text   fontSize={'14px'} flex={2}>Economia total :</Text>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{((selectedRow?.parcelaAtual - selectedRow?.pmt) * selectedRow?.parcelaRestante).toFixed(2)}</Flex>
+                    </Flex>
+                    
                   </Box>
                 </GridItem>
               </Grid>
