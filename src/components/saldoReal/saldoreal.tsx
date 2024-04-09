@@ -59,12 +59,12 @@ export function BalanceDataSystem() {
         <Text fontSize={["sm", "md"]} textAlign="center">Preencher dados somente em amarelo</Text>
       </Box>
       <Flex mb={20} justify={"center"} gap={10}>
-        <Link href="/saldoReal">
+        <Link href="realsaldo">
           <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }} fontSize={["sm", "md"]}>
             Saldo Real
           </Button>
         </Link>
-        <Link href="/dadosSistema">
+        <Link href="sistemaDado">
           <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }} fontSize={["sm", "md"]}>
             Dados Sistema
           </Button>

@@ -76,7 +76,7 @@ export function RealBalance() {
         <Text>Preencher dados somente em amarelo</Text>
       </Box>
       <Flex mb={20} justify={"center"} gap={10}>
-        <Link href="saldoReal">
+        <Link href="realsaldo">
           <Button
             bg={"#201658"}
             color={"white"}
@@ -85,7 +85,7 @@ export function RealBalance() {
             Saldo Real
           </Button>
         </Link>
-        <Link href="dadosSistema">
+        <Link href="sistemaDado">
           <Button
             bg={"#201658"}
             color={"white"}
