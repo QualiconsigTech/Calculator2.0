@@ -309,7 +309,7 @@ export const Portabilidade = ({taxa}:any) => {
                     </Box>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Economia Mensal :</Text>
-                      <Flex align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.parcelaAtual - selectedRow?.pmt)} </Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.parcelaAtual - selectedRow?.pmt)} </Flex>
                     </Flex>
                     <Flex gap={2}  mb={2}>
                       <Text   fontSize={'14px'} flex={2}>Economia total :</Text>
