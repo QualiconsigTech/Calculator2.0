@@ -1,5 +1,5 @@
-import { BalanceDataSystem } from "../../../compontents/calculatorSide/SaldoReal";
-import { Portabilidade } from "../../../compontents/resultSide/Portabilidade";
+import { BalanceDataSystem } from "@/compontents/calculatorSide/SaldoReal";
+import { Portabilidade } from "@/compontents/resultSide/Portabilidade";
 import { Box, Flex } from "@chakra-ui/react";
 
 export default function Calculator () {
