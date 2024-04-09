@@ -31,25 +31,27 @@ export function RealBalance() {
   };
 
   const FormReceived = () => {
+    const parcelaAtual = formData?.ValorParcelaAtual.toString().replace(',', '.')
+    const valorEmprestimo = formData?.VlEmprestimo.toString().replace(',', '.')
     const InbursaResponse = CalculadoraInbursa(
-      formData?.ValorParcelaAtual,
+      parseFloat(parcelaAtual!),
       formData?.PrazoRestante,
-      formData?.VlEmprestimo
+      parseFloat(valorEmprestimo!)
     );
     const PagBankResponse = CalculadoraPagBank(
-      formData?.ValorParcelaAtual,
+      parseFloat(parcelaAtual!),
       formData?.PrazoRestante,
-      formData?.VlEmprestimo
+      parseFloat(valorEmprestimo!)
     );
     const C6Response = CalculadoraC6(
-      formData?.ValorParcelaAtual,
+      parseFloat(parcelaAtual!),
       formData?.PrazoRestante,
-      formData?.VlEmprestimo
+      parseFloat(valorEmprestimo!)
     );
     const taxaResponse = CalcularTaxa(
-      formData?.ValorParcelaAtual,
+      parseFloat(parcelaAtual!),
       formData?.PrazoRestante,
-      formData?.VlEmprestimo
+      parseFloat(valorEmprestimo!)
     );
     setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
     setTaxaResponse(taxaResponse);

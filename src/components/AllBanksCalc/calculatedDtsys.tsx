@@ -30,7 +30,7 @@ export const PagbankDataSystem = (
   SaldoDevedor: any,
   parcelasPagas: any
 ) => {
-  const taxas = [1.45, 1.54, 1.58, 1.68, 1.78];
+  const taxas = [1.72, 1.70, 1.66, 1.60, 1.56];
   const PagbankCalc = new CalculadoraGeral(taxas);
   const pmt = PagbankCalc.calcularPMTComParcelasPagas(
     SaldoDevedor,
@@ -54,7 +54,7 @@ export const C6DataSystem = (
   SaldoDevedor: any,
   parcelasPagas: any
 ) => {
-  const taxas = [1.55, 1.60, 1.65, 1.70, 1.75];
+  const taxas =  [1.55, 1.60, 1.65, 1.70, 1.75];
   const C6Calc = new CalculadoraGeral(taxas);
   const pmt = C6Calc.calcularPMTComParcelasPagas(
     SaldoDevedor,
