@@ -179,7 +179,7 @@ export const Portabilidade = () => {
                   }}
                 >
                   <Td>{item.nameBank}</Td>
-                  <Td>{item.tax}</Td>
+                  <Td>{item.tax.toFixed(2)}</Td>
                   <Td>{FormatedNumber(item.pmt)}</Td>
                   <Td>{FormatedNumber(item.parcelaAtual - item.pmt)}</Td>
                   <Td>

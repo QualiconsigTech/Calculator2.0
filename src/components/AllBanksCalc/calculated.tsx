@@ -107,6 +107,7 @@ export const CalcularTaxa = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor
     parcelaRestante,
     SaldoDevedor
   };
+ 
   return TaxaCalc
 
 
