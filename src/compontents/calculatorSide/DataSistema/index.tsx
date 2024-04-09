@@ -1,5 +1,5 @@
 import { useInbursaContextHook } from "../../../Context/InbursaContext";
-import { CalculadoraC6, CalculadoraInbursa, CalculadoraPagBank, CalcularTaxa } from "../../../compontents/AllBanksCalc/calculated";
+import { CalculadoraC6, CalculadoraInbursa, CalculadoraPagBank, CalcularTaxa } from "../../AllBanksCalc/calculated";
 import { saldoReal } from "../../../types/SaldoReal/saldoReal";
 import { BoxInput, TextInput } from "../../../utils/formBox/boxInput";
 import { FormBox } from "../../../utils/formBox/formBox";

@@ -1,5 +1,5 @@
-import { RealBalance } from "@/compontents/calculatorSide/DataSistema";
-import { Portabilidade } from "@/compontents/resultSide/Portabilidade";
+import { RealBalance } from "@/compontents/calculatorSide/dataSistema";
+import { Portabilidade } from "@/compontents/resultSide/portabilidade";
 import { Box, Flex } from "@chakra-ui/react";
 
 export default function Calculator () {
