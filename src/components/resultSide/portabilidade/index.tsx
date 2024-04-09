@@ -257,17 +257,17 @@ export const Portabilidade = ({taxa}:any) => {
                       <Text fontSize={'14px'} flex={2}>Saldo devedor aproximado :</Text>
                       <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor.toFixed(2)}</Flex>
                     </Flex>
-                    {selectedRow?.parcelaPagas &&
+                    {selectedRow?.parcelasPagas &&
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Parcelas restantes :</Text>
-                      <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante - selectedRow?.parcelasPagas}</Flex>
+                      <Flex gap={2} align="center" flex={1}>{parseInt(selectedRow?.parcelaRestante) - parseInt(selectedRow?.parcelasPagas)}</Flex>
                     </Flex>
                     }
-                    {selectedRow?.parcelaPagas === undefined &&
-                      <Flex gap={2} mt={2} mb={2}>
-                        <Text flex={2} fontSize={'14px'}>Parcelas restantes :</Text>
-                        <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante}</Flex>
-                     </Flex>
+                     {!selectedRow?.parcelasPagas &&
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Parcelas restantes :</Text>
+                      <Flex gap={2} align="center" flex={1}>{parseInt(selectedRow?.parcelaRestante) }</Flex>
+                    </Flex>
                     }
                   </Box>
                 </GridItem>
@@ -288,18 +288,20 @@ export const Portabilidade = ({taxa}:any) => {
                       <Text flex={2} fontSize={'14px'}>Saldo devedor aproximado :</Text>
                       <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor}</Flex>
                     </Flex>
-                    {selectedRow?.parcelaPagas &&
+                    
+                    {selectedRow?.parcelasPagas &&
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Parcelas restantes :</Text>
-                      <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante - selectedRow?.parcelasPagas}</Flex>
+                      <Flex gap={2} align="center" flex={1}>{parseInt(selectedRow?.parcelaRestante) - parseInt(selectedRow?.parcelasPagas)}</Flex>
                     </Flex>
                     }
-                    {selectedRow?.parcelaPagas === undefined &&
-                      <Flex gap={2} mt={2} mb={2}>
-                        <Text flex={2} fontSize={'14px'}>Parcelas restantes :</Text>
-                        <Flex gap={2} align="center" flex={1}>{selectedRow?.parcelaRestante}</Flex>
-                     </Flex>
+                     {!selectedRow?.parcelasPagas &&
+                    <Flex gap={2} mt={2} mb={2}>
+                      <Text fontSize={'14px'} flex={2}>Parcelas restantes :</Text>
+                      <Flex gap={2} align="center" flex={1}>{parseInt(selectedRow?.parcelaRestante) }</Flex>
+                    </Flex>
                     }
+                  
                   </Box>
                 </GridItem>
                 <GridItem>
