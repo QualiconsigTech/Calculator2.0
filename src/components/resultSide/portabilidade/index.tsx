@@ -333,7 +333,7 @@ export const Portabilidade = ({taxa}:any) => {
                 </Flex>
                 <Flex gap={2} alignItems={"center"}>
                   <Icon as={MdOutlineMail} textAlign={"center"} />
-                  <Text textAlign={"center"}>Contato</Text>
+                 
                   <Text>contato@qualiconsig.com.br</Text>
                 </Flex>
                 <Flex gap={2} alignItems={"center"}>
