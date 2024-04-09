@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export const BalanceDataSystem = () => {
+export function BalanceDataSystem() {
   const {inbursatax, setInbursaTax} = useInbursaContextHook()
 
   const {
