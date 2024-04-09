@@ -1,4 +1,5 @@
-import { RealBalance  } from '../../../compontents/calculatorSide/dataSistema';
+
+import { RealBalance } from "@/compontents/calculatorSide/datasistema";
 import { Portabilidade } from "@/compontents/resultSide/portabilidade";
 import { Box, Flex } from "@chakra-ui/react";
 
