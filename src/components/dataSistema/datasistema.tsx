@@ -143,7 +143,10 @@ export function RealBalance({taxaares}:any) {
                   borderRadius={5}
                   {...register('TaxaAtual')}
                 >
-                 {taxaResponse}
+                  {taxaResponse !== 100 &&
+                  <Text>{taxaResponse}</Text>
+                 
+                }
                 </Flex>
               </BoxInput>
               <Button type="submit">Calcular</Button>

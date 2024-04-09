@@ -146,7 +146,9 @@ export function BalanceDataSystem({taxaatual}:any) {
                   borderRadius={5}
                   
                 >
-                 {taxaResponse}
+                  {taxaResponse !== 100 &&
+                 <Text>{taxaResponse}</Text>
+                }
                 </Flex>
               </BoxInput>
               <BoxInput>
