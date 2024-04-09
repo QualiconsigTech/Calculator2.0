@@ -17,7 +17,7 @@ export class CalculadoraGeral {
     const valorPresenteNumber = this.parseNumber(valorPresente);
     const result: number[] = [];
     this.taxas.forEach((taxa: number) => {
-      const tax = taxa + 0.05;
+      const tax = this.parseNumber(taxa) + 0.05;
       const tx = tax / 100;
       let total =
         (valorPresenteNumber * tx) / (1 - Math.pow(1 + tx, -numeroParcelas));
@@ -33,10 +33,7 @@ export class CalculadoraGeral {
     valorPresente: any,
     precisao = 1e-9
   ): number {
-    const valorPresenteNumber =
-      typeof valorPresente === "string"
-        ? parseFloat(valorPresente.replace(",", "."))
-        : valorPresente;
+    const valorPresenteNumber = this.parseNumber(valorPresente);
     let taxaMin = 0.0;
     let taxaMax = 1.0;
 
@@ -79,7 +76,7 @@ export class CalculadoraGeral {
     const valorPresenteNumber = this.parseNumber(valorPresente);
     const result: number[] = [];
     this.taxas.forEach((taxa: number) => {
-      const tax = taxa + 0.05;
+      const tax = this.parseNumber(taxa) + 0.05;
       const tx = tax / 100;
       let total =
         (valorPresenteNumber * tx) /
@@ -89,6 +86,4 @@ export class CalculadoraGeral {
     });
     return result;
   }
- 
-  
 }

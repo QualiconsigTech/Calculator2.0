@@ -30,10 +30,12 @@ export function BalanceDataSystem() {
   };
 
   const FormReceived = () => {
-    const InbursaResponse = InbursaDataSystem(formData?.ParcelaAtual, formData?.prazoInicial, formData?.ValorEmprestimoContratado, formData?.parcelasPagas)
-    const PagBankResponse = PagbankDataSystem(formData?.ParcelaAtual, formData?.prazoInicial, formData?.ValorEmprestimoContratado, formData?.parcelasPagas)
-    const C6Response = C6DataSystem(formData?.ParcelaAtual, formData?.prazoInicial, formData?.ValorEmprestimoContratado, formData?.parcelasPagas)
-    const taxaResponse = CalcularTaxa(formData?.ParcelaAtual, formData?.prazoInicial, formData?.ValorEmprestimoContratado)
+    const parcelaAtual = formData?.ParcelaAtual.toString().replace(',', '.')
+    const valorEmprestimo = formData?.ValorEmprestimoContratado.toString().replace(',', '.')
+    const InbursaResponse = InbursaDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
+    const PagBankResponse = PagbankDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
+    const C6Response = C6DataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
+    const taxaResponse = CalcularTaxa(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!))
     setInbursaTax({InbursaResponse, PagBankResponse, C6Response})
     setTaxaResponse(taxaResponse)
   }
