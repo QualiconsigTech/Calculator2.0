@@ -98,7 +98,7 @@ export const Portabilidade = () => {
   };
 
   return (
-    <Flex flex={2} flexDir={"column"} bg={"#98ABEE"} color={"white"} p={4}>
+    <Flex  flexDir={"column"} bg={"#98ABEE"} color={"white"} p={4}>
       <Box>Portabilidade</Box>
       <Flex>
         <List display={"flex"} gap={5} w={"100%"} justifyContent={"center"}>
