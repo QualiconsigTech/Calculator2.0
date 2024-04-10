@@ -105,7 +105,7 @@ export function BalanceDataSystem({taxaatual}:any) {
                 <Input
                   bg={"yellow.100"}
                   type="text"
-                  placeholder="Saldo devedor real"
+                  placeholder="Vl. emprestimo"
                   borderRadius={5}
                   {...register('ValorEmprestimoContratado')}
                 />
