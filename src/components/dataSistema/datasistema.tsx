@@ -124,11 +124,11 @@ export function RealBalance({taxaares}:any) {
                 />
               </BoxInput>
               <BoxInput>
-                <TextInput>Vl emprestimo</TextInput>
+                <TextInput>Saldo real</TextInput>
                 <Input
                   bg={"yellow.100"}
                   type="text"
-                  placeholder="Vl emprestimo"
+                  placeholder="Saldo real"
                   borderRadius={5}
                   {...register('VlEmprestimo')}
                 />
