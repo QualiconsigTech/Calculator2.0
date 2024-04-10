@@ -101,11 +101,11 @@ export function BalanceDataSystem({taxaatual}:any) {
                 />
               </BoxInput>
               <BoxInput>
-                <TextInput>Vl emprestimo</TextInput>
+                <TextInput>Saldo devedor real</TextInput>
                 <Input
                   bg={"yellow.100"}
                   type="text"
-                  placeholder="Vl emprestimo"
+                  placeholder="Saldo devedor real"
                   borderRadius={5}
                   {...register('ValorEmprestimoContratado')}
                 />
