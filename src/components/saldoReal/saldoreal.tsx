@@ -101,7 +101,7 @@ export function BalanceDataSystem({taxaatual}:any) {
                 />
               </BoxInput>
               <BoxInput>
-                <TextInput>Saldo devedor real</TextInput>
+                <TextInput>Vl. emprestimo</TextInput>
                 <Input
                   bg={"yellow.100"}
                   type="text"
