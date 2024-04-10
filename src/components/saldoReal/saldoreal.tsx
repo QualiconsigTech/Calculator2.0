@@ -31,7 +31,7 @@ export function BalanceDataSystem({taxaatual}:any) {
 
   const FormReceived = () => {
     const parcelaAtual = formData?.ParcelaAtual.toString().replace(',', '.')
-    const valorEmprestimo = formData?.ValorEmprestimoContratado.toString().replace(',', '.')
+    const valorEmprestimo = formData?.ValorEmprestimoContratado.toString().replace('.', '')
     const InbursaResponse = InbursaDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
     const PagBankResponse = PagbankDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
     const C6Response = C6DataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
@@ -105,7 +105,7 @@ export function BalanceDataSystem({taxaatual}:any) {
                 <Input
                   bg={"yellow.100"}
                   type="text"
-                  placeholder="Vl. emprestimo"
+                  placeholder="vl. emprestimo"
                   borderRadius={5}
                   {...register('ValorEmprestimoContratado')}
                 />

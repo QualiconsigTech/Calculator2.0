@@ -75,6 +75,7 @@ export class CalculadoraGeral {
     numeroParcelas: any,
     parcelasPagas: number
   ): number[] {
+    
     const valorPresenteNumber = this.parseNumber(valorPresente);
     const result: number[] = [];
     this.taxas.forEach((taxa: number) => {
@@ -89,5 +90,9 @@ export class CalculadoraGeral {
     return result;
   }
 
- 
+   calcularVP(nper:number, pmt:number) {
+   const rate = this.taxa
+   const vp = (pmt / rate * (1 - Math.pow(1 + rate, -nper)))
+   return vp
+}
 }

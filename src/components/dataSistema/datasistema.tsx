@@ -32,7 +32,7 @@ export function RealBalance({taxaares}:any) {
 
   const FormReceived = () => {
     const parcelaAtual = formData?.ValorParcelaAtual.toString().replace(',', '.')
-    const valorEmprestimo = formData?.VlEmprestimo.toString().replace(',', '.')
+    const valorEmprestimo = formData?.VlEmprestimo.toString().replace('.', '')
     const InbursaResponse = CalculadoraInbursa(
       parseFloat(parcelaAtual!),
       formData?.PrazoRestante,
