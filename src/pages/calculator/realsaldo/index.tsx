@@ -1,5 +1,7 @@
 
+import Load from "@/components/load";
 import { Portabilidade } from "@/components/resultSide/portabilidade";
+import { PortabilidadeMarg } from "@/components/resultSide/portabilidadeMarg";
 import { BalanceDataSystem } from "@/components/saldoReal/saldoreal";
 import { Box, Flex } from "@chakra-ui/react";
 import { useState } from "react";
@@ -13,8 +15,9 @@ export default function Calculatortwo() {
     return (
         <Box>
             <Flex flexDir={['column', 'column', 'column', 'row']}>
+               
                 <BalanceDataSystem taxaatual={tax} />
-                <Portabilidade taxa={taxaAtual}/>
+                <PortabilidadeMarg taxa={taxaAtual}/>
             </Flex>
         </Box>
     );

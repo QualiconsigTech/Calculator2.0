@@ -36,7 +36,7 @@ import { MdOutlineMail } from "react-icons/md";
 import { TbCurrencyReal } from "react-icons/tb";
 import { PiBankFill } from "react-icons/pi";
 
-export const Portabilidade = ({taxa}:any) => {
+export const PortabilidadeMarg = ({taxa}:any) => {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const { inbursatax } = useInbursaContextHook();
   const [ordenedList, setOrdenedList] = useState<any[]>([]);
@@ -64,6 +64,7 @@ export const Portabilidade = ({taxa}:any) => {
             parcelaRestante: element.parcelaRestante,
             saldoDevedor: element.SaldoDevedor,
             parcelasPagas: element.parcelasPagas,
+            valorPresent: element.valorPresent
           };
           formattedData.push(obj);
         }
@@ -251,14 +252,14 @@ export const Portabilidade = ({taxa}:any) => {
                     </Flex>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Taxa atual contrato :</Text>
-                      
-                      <Flex gap={2} align="center" flex={1}><Icon as={FaPercent} fontSize={'12px'}/>{taxa}</Flex>
-                      
+                      {taxa?.TaxaCalc &&
+                      <Flex gap={2} align="center" flex={1}><Icon as={FaPercent} fontSize={'12px'}/>{taxa.TaxaCalc}</Flex>
+                      }
                       
                       </Flex>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Saldo devedor aproximado :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor.toFixed(2)}</Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.valorPresent.toFixed(2)}</Flex>
                     </Flex>
                     {selectedRow?.parcelasPagas &&
                     <Flex gap={2} mt={2} mb={2}>
@@ -289,7 +290,7 @@ export const Portabilidade = ({taxa}:any) => {
                     </Flex>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text flex={2} fontSize={'14px'}>Saldo devedor aproximado :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor}</Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.valorPresent.toFixed(2)}</Flex>
                     </Flex>
                     
                     {selectedRow?.parcelasPagas &&
@@ -326,7 +327,7 @@ export const Portabilidade = ({taxa}:any) => {
               </Grid>
             </ModalBody>
             <ModalFooter justifyContent="center">
-            <Flex flexDir={'column'} justify={'center'} align={'center'} >
+              <Flex flexDir={'column'} justify={'center'} align={'center'} >
               <Flex gap={3}  justify={'center'} mb={4}>
                 <Flex alignItems={"center"} gap={2}>
                   <Icon as={FaPhoneAlt} textAlign={"center"} />

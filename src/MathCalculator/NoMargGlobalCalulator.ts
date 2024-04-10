@@ -1,4 +1,4 @@
-export class CalculadoraGeral {
+export class NoCalculadoraGeral {
   taxas: number[];
   taxa : number | any
   
@@ -18,7 +18,7 @@ export class CalculadoraGeral {
     const valorPresenteNumber = this.parseNumber(valorPresente);
     const result: number[] = [];
     this.taxas.forEach((taxa: number) => {
-      const tax = this.parseNumber(taxa) + 0.05;
+      const tax = this.parseNumber(taxa)
       const tx = tax / 100;
       let total =
         (valorPresenteNumber * tx) / (1 - Math.pow(1 + tx, -numeroParcelas));
@@ -78,7 +78,7 @@ export class CalculadoraGeral {
     const valorPresenteNumber = this.parseNumber(valorPresente);
     const result: number[] = [];
     this.taxas.forEach((taxa: number) => {
-      const tax = this.parseNumber(taxa) + 0.05;
+      const tax = this.parseNumber(taxa);
       const tx = tax / 100;
       let total =
         (valorPresenteNumber * tx) /

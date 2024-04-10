@@ -1,6 +1,6 @@
 import { useInbursaContextHook } from "../../Context/InbursaContext";
 import { CalcularTaxa } from "../AllBanksCalc/calculated";
-import { C6DataSystem, InbursaDataSystem, PagbankDataSystem } from "../AllBanksCalc/calculatedDtsys";
+import { C6DataSystem, CalcularTaxaSystem, InbursaDataSystem, PagbankDataSystem } from "../AllBanksCalc/calculatedDtsys";
 import { saldoDataSyst, saldoReal } from "../../types/SaldoReal/saldoReal";
 import { BoxInput, TextInput } from "../../utils/formBox/boxInput";
 import { FormBox } from "../../utils/formBox/formBox";
@@ -24,7 +24,7 @@ export function BalanceDataSystem({taxaatual}:any) {
     formState: { errors },
   } = useForm<any>();
   const [formData, setFormData] = useState<saldoDataSyst>();
-  const [taxaResponse, setTaxaResponse] = useState<number>()
+  const [taxaResponse, setTaxaResponse] = useState<any>()
   const onSubmit: SubmitHandler<any> = async (data:saldoDataSyst) => {
     setFormData(data);
   };
@@ -35,10 +35,12 @@ export function BalanceDataSystem({taxaatual}:any) {
     const InbursaResponse = InbursaDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
     const PagBankResponse = PagbankDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
     const C6Response = C6DataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
-    const taxaResponse = CalcularTaxa(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!))
+    const taxaResponse = CalcularTaxaSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
     setInbursaTax({InbursaResponse, PagBankResponse, C6Response})
     setTaxaResponse(taxaResponse)
+    console.log(taxaResponse)
     taxaatual(taxaResponse)
+
   }
 
   useEffect(()=> {
@@ -64,12 +66,12 @@ export function BalanceDataSystem({taxaatual}:any) {
       <Flex mb={20} justify={"center"} gap={10}>
         <Link href="realsaldo">
           <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }} fontSize={["sm", "md"]}>
-            Saldo Real
+            Dados Sistema
           </Button>
         </Link>
         <Link href="sistemaDado">
           <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }} fontSize={["sm", "md"]}>
-            Dados Sistema
+            Saldo Real
           </Button>
         </Link>
       </Flex>
@@ -147,7 +149,7 @@ export function BalanceDataSystem({taxaatual}:any) {
                   
                 >
                   {taxaResponse !== 100 &&
-                 <Text>{taxaResponse}</Text>
+                 <Text>{taxaResponse?.TaxaCalc}</Text>
                 }
                 </Flex>
               </BoxInput>
@@ -161,7 +163,7 @@ export function BalanceDataSystem({taxaatual}:any) {
                   borderRadius={5}
                   
                 >
-               {formData?.ValorEmprestimoContratado }
+               {taxaResponse?.formatedVp }
                 </Flex>
               </BoxInput>
               <Button type="submit" alignSelf="flex-end">Calcular</Button>

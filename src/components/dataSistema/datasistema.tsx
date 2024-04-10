@@ -85,7 +85,7 @@ export function RealBalance({taxaares}:any) {
             color={"white"}
             _hover={{ bg: "#3F3D56" }}
           >
-            Saldo Real
+            Dados Sistema 
           </Button>
         </Link>
         <Link href="sistemaDado">
@@ -94,7 +94,7 @@ export function RealBalance({taxaares}:any) {
             color={"white"}
             _hover={{ bg: "#3F3D56" }}
           >
-            Dados Sistema
+            Saldo Real
           </Button>
         </Link>
       </Flex>

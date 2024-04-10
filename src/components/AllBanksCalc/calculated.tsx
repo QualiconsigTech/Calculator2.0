@@ -86,18 +86,19 @@ export const CalcularTaxa = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor
 
 
   const taxas = [ 1.45, 1.54, 1.58 , 1.68 ,1.78]
-  const InbursaCalc = new CalculadoraGeral(taxas)
-  const TaxaCalc = InbursaCalc.calcularTaxa(
+  const TaxaCalculator = new CalculadoraGeral(taxas)
+  const TaxaCalc = TaxaCalculator.calcularTaxa(
     parcelaAtual,
     parcelaRestante,
     -SaldoDevedor,
     1e-6
   )
   
-  const pmt = InbursaCalc.calcularPMT(
+  const pmt = TaxaCalculator.calcularPMT(
       SaldoDevedor,
       parcelaRestante
   )
+ 
   
   const objInbursaPmt = {
     nameBank: 'Inbursa',
