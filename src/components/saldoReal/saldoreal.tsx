@@ -148,7 +148,7 @@ export function BalanceDataSystem({taxaatual}:any) {
                   borderRadius={5}
                   
                 >
-                  {taxaResponse !== 100 &&
+                  {taxaResponse?.TaxaCalc !== 100 &&
                  <Text>{taxaResponse?.TaxaCalc}</Text>
                 }
                 </Flex>
@@ -163,7 +163,9 @@ export function BalanceDataSystem({taxaatual}:any) {
                   borderRadius={5}
                   
                 >
-               {taxaResponse?.formatedVp }
+                  {taxaResponse?.formatedVp > 0 &&
+                <Text>{taxaResponse?.formatedVp }</Text> 
+              }
                 </Flex>
               </BoxInput>
               <Button type="submit" alignSelf="flex-end">Calcular</Button>
