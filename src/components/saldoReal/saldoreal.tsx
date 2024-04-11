@@ -30,7 +30,7 @@ export function BalanceDataSystem({taxaatual}:any) {
   };
 
   const FormReceived = () => {
-    const parcelaAtual = formData?.ParcelaAtual.toString().replace(',', '.')
+    const parcelaAtual = formData?.ParcelaAtual.toString().replace('.', '')
     const valorEmprestimo = formData?.ValorEmprestimoContratado.toString().replace('.', '')
     const InbursaResponse = InbursaDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
     const PagBankResponse = PagbankDataSystem(parseFloat(parcelaAtual!), formData?.prazoInicial, parseFloat(valorEmprestimo!), formData?.parcelasPagas)
