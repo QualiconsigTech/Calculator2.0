@@ -8,12 +8,14 @@ import {
   Box,
   Button,
   Flex,
+  Icon,
   Input,
   Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { CiCalculator1 } from "react-icons/ci";
 
 export function BalanceDataSystem({taxaatual}:any) {
   const {inbursatax, setInbursaTax} = useInbursaContextHook()
@@ -168,7 +170,9 @@ export function BalanceDataSystem({taxaatual}:any) {
               }
                 </Flex>
               </BoxInput>
-              <Button type="submit" alignSelf="flex-end">Calcular</Button>
+              <Button type="submit" alignSelf="flex-end" gap={2} bg={'#074173'} color={'white'} _hover={{
+                background: '#073173'
+              }}><Icon as={CiCalculator1 }/>Calcular</Button>
             </FormBox>
           </form>
 

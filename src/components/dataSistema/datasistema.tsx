@@ -3,10 +3,13 @@ import { CalculadoraC6, CalculadoraInbursa, CalculadoraPagBank, CalcularTaxa } f
 import { saldoReal } from "../../types/SaldoReal/saldoReal";
 import { BoxInput, TextInput } from "../../utils/formBox/boxInput";
 import { FormBox } from "../../utils/formBox/formBox";
+import { CiCalculator1 } from "react-icons/ci";
+
 import {
   Box,
   Button,
   Flex,
+  Icon,
   Input,
   Text,
   useMediaQuery,
@@ -149,7 +152,9 @@ export function RealBalance({taxaares}:any) {
                 }
                 </Flex>
               </BoxInput>
-              <Button type="submit">Calcular</Button>
+              <Button type="submit" gap={2} bg={'#074173'} color={'white'} _hover={{
+                background: '#073173'
+              }}><Icon as={CiCalculator1 }/>Calcular</Button>
             </FormBox>
           </form>
 
