@@ -247,18 +247,18 @@ export const Portabilidade = ({taxa}:any) => {
                     </Box>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Parcela atual :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.parcelaAtual.toFixed(2) }</Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.parcelaAtual) }</Flex>
                     </Flex>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Taxa atual contrato :</Text>
                       
-                      <Flex gap={2} align="center" flex={1}><Icon as={FaPercent} fontSize={'12px'}/>{taxa}</Flex>
+                      <Flex gap={2} align="center" flex={1}>{taxa}<Icon as={FaPercent} fontSize={'12px'}/></Flex>
                       
                       
                       </Flex>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Saldo devedor aproximado :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor.toFixed(2)}</Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.saldoDevedor)}</Flex>
                     </Flex>
                     {selectedRow?.parcelasPagas &&
                     <Flex gap={2} mt={2} mb={2}>
@@ -280,17 +280,14 @@ export const Portabilidade = ({taxa}:any) => {
                       <Text fontSize={'xl'} fontWeight={'650'}>Novo contrato</Text>
                     </Box>
                     <Flex gap={2} mt={2} mb={2}>
-                      <Text flex={2} fontSize={'14px'}>Parcela atual :</Text>
-                      <Flex gap={2}  align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.pmt}</Flex>
+                      <Text flex={2} fontSize={'14px'}>Nova Parcela :</Text>
+                      <Flex gap={2}  align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.pmt)}</Flex>
                     </Flex>
                     <Flex gap={2} mt={2} mb={2}>
-                      <Text flex={2} fontSize={'14px'}>Taxa atual contrato :</Text>
-                      <Flex gap={2} align="center"  flex={1}><Icon as={FaPercent} fontSize={'12px'}/>{selectedRow?.tax}</Flex>
+                      <Text flex={2} fontSize={'14px'}>Nova taxa contrado</Text>
+                      <Flex gap={2} align="center"  flex={1}>{selectedRow?.tax}<Icon as={FaPercent} fontSize={'12px'}/></Flex>
                     </Flex>
-                    <Flex gap={2} mt={2} mb={2}>
-                      <Text flex={2} fontSize={'14px'}>Saldo devedor aproximado :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.saldoDevedor}</Flex>
-                    </Flex>
+                   
                     
                     {selectedRow?.parcelasPagas &&
                     <Flex gap={2} mt={2} mb={2}>

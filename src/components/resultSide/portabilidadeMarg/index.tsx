@@ -248,7 +248,7 @@ export const PortabilidadeMarg = ({taxa}:any) => {
                     </Box>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Parcela atual :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.parcelaAtual.toFixed(2) }</Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.parcelaAtual) }</Flex>
                     </Flex>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Taxa atual contrato :</Text>
@@ -259,12 +259,12 @@ export const PortabilidadeMarg = ({taxa}:any) => {
                       </Flex>
                     <Flex gap={2} mt={2} mb={2}>
                       <Text fontSize={'14px'} flex={2}>Saldo devedor aproximado :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.valorPresent.toFixed(2)}</Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.valorPresent)}</Flex>
                     </Flex>
                     {selectedRow?.parcelasPagas &&
                     <Flex gap={2} mt={2} mb={2}>
-                      <Text fontSize={'14px'} flex={2}>Parcelas restantes :</Text>
-                      <Flex gap={2} align="center" flex={1}>{parseInt(selectedRow?.parcelaRestante) - parseInt(selectedRow?.parcelasPagas)}</Flex>
+                      <Text fontSize={'14px'} flex={2}>Parcelas Restantes :</Text>
+                      <Flex gap={2} align="center" flex={1}>{(parseInt(selectedRow?.parcelaRestante) - parseInt(selectedRow?.parcelasPagas))}</Flex>
                     </Flex>
                     }
                      {!selectedRow?.parcelasPagas &&
@@ -281,17 +281,14 @@ export const PortabilidadeMarg = ({taxa}:any) => {
                       <Text fontSize={'xl'} fontWeight={'650'}>Novo contrato</Text>
                     </Box>
                     <Flex gap={2} mt={2} mb={2}>
-                      <Text flex={2} fontSize={'14px'}>Parcela atual :</Text>
-                      <Flex gap={2}  align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.pmt}</Flex>
+                      <Text flex={2} fontSize={'14px'}>Nova Parcela :</Text>
+                      <Flex gap={2}  align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.pmt)}</Flex>
                     </Flex>
                     <Flex gap={2} mt={2} mb={2}>
-                      <Text flex={2} fontSize={'14px'}>Taxa atual contrato :</Text>
-                      <Flex gap={2} align="center"  flex={1}><Icon as={FaPercent} fontSize={'12px'}/>{selectedRow?.tax}</Flex>
+                      <Text flex={2} fontSize={'14px'}>Nova Taxa :</Text>
+                      <Flex gap={2} align="center"  flex={1}>{selectedRow?.tax.toFixed(2)}<Icon as={FaPercent} fontSize={'12px'}/></Flex>
                     </Flex>
-                    <Flex gap={2} mt={2} mb={2}>
-                      <Text flex={2} fontSize={'14px'}>Saldo devedor aproximado :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{selectedRow?.valorPresent.toFixed(2)}</Flex>
-                    </Flex>
+      
                     
                     {selectedRow?.parcelasPagas &&
                     <Flex gap={2} mt={2} mb={2}>
@@ -319,7 +316,7 @@ export const PortabilidadeMarg = ({taxa}:any) => {
                     </Flex>
                     <Flex gap={2}  mb={2}>
                       <Text   fontSize={'14px'} flex={2}>Economia total :</Text>
-                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{((selectedRow?.parcelaAtual - selectedRow?.pmt) * selectedRow?.parcelaRestante).toFixed(2)}</Flex>
+                      <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber((selectedRow?.parcelaAtual - selectedRow?.pmt) * selectedRow?.parcelaRestante)}</Flex>
                     </Flex>
                     
                   </Box>
