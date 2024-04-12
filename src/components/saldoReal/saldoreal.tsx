@@ -195,7 +195,7 @@ export function BalanceDataSystem({ taxaatual }: any) {
                 <Icon as={CiCalculator1} />
                 Calcular
               </Button>
-              <Button onClick={handleClearForm}>Clear</Button>
+              <Button onClick={handleClearForm}>Limpar</Button>
             </FormBox>
           </form>
         </Flex>
