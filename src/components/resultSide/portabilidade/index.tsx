@@ -168,7 +168,8 @@ export const Portabilidade = ({taxa}:any) => {
             </Th>
           </Tr>
         </Thead>
-        {inbursatax?.InbursaResponse.pmt[0] > 0 && (
+       
+        {inbursatax?.InbursaResponse?.pmt[0] > 0 && (
           <Tbody>
             {ordenedList
               .filter((item) => !selectedBank || item.nameBank === selectedBank) // Filtro baseado no banco selecionado
@@ -214,6 +215,7 @@ export const Portabilidade = ({taxa}:any) => {
               ))}
           </Tbody>
         )}
+     
       </Table>
       <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <ModalOverlay />

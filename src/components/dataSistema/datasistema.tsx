@@ -18,24 +18,25 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export function RealBalance({taxaares}:any) {
+export function RealBalance({ taxaares }: any) {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const { inbursatax, setInbursaTax } = useInbursaContextHook();
 
   const {
     register,
     handleSubmit,
+    reset, 
     formState: { errors },
   } = useForm<any>();
-  const [formData, setFormData] = useState<saldoReal>();
+  const [formData, setFormData] = useState<saldoReal | any>();
   const [taxaResponse, setTaxaResponse] = useState<number>();
   const onSubmit: SubmitHandler<any> = async (data: saldoReal) => {
     setFormData(data);
   };
 
   const FormReceived = () => {
-    const parcelaAtual = formData?.ValorParcelaAtual.toString().replace('.', '')
-    const valorEmprestimo = formData?.VlEmprestimo.toString().replace('.', '')
+    const parcelaAtual = formData?.ValorParcelaAtual?.toString().replace('.', '');
+    const valorEmprestimo = formData?.VlEmprestimo?.toString().replace('.', '');
     const InbursaResponse = CalculadoraInbursa(
       parseFloat(parcelaAtual!),
       formData?.PrazoRestante,
@@ -58,12 +59,17 @@ export function RealBalance({taxaares}:any) {
     );
     setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
     setTaxaResponse(taxaResponse);
-    taxaares(taxaResponse)
+    taxaares(taxaResponse);
   };
 
   useEffect(() => {
     FormReceived();
   }, [formData]);
+
+  const handleClearForm = () => {
+    reset(); 
+    setFormData({});
+  };
 
   return (
     <Flex
@@ -83,83 +89,94 @@ export function RealBalance({taxaares}:any) {
       </Box>
       <Flex mb={20} justify={"center"} gap={10}>
         <Link href="realsaldo">
-          <Button
-            bg={"#201658"}
-            color={"white"}
-            _hover={{ bg: "#3F3D56" }}
-          >
-            Dados Sistema 
+          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
+            Dados Sistema
           </Button>
         </Link>
         <Link href="sistemaDado">
-          <Button
-            bg={"#201658"}
-            color={"white"}
-            _hover={{ bg: "#3F3D56" }}
-          >
+          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
             Saldo Real
           </Button>
         </Link>
       </Flex>
-      <Box bg={"#FFFFFF"} p={10} borderRadius={10} boxShadow={"md"} w={"100%"}>
+      <Box
+        bg={"#FFFFFF"}
+        p={10}
+        borderRadius={10}
+        boxShadow={"md"}
+        w={"100%"}
+        maxW={"500px"} // Definindo uma largura máxima para evitar quebra de layout
+      >
         <Flex justify={"center"} align={"center"}>
-
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormBox>
               <BoxInput>
-                <TextInput>Valor parcela atual</TextInput>
+                <Text mb={'10px'}>Valor parcela atual</Text>
                 <Input
                   bg={"yellow.100"}
                   type="text"
                   placeholder="Valor parcela atual"
                   borderRadius={5}
-                  {...register('ValorParcelaAtual')}
+                  {...register("ValorParcelaAtual")}
                 />
               </BoxInput>
               <BoxInput>
-                <TextInput>Prazo Restante</TextInput>
+                <Text mb={'10px'}>Prazo Restante</Text>
                 <Input
                   bg={"yellow.100"}
                   type="text"
                   placeholder="Prazo restante"
                   borderRadius={5}
-                  {...register('PrazoRestante')}
+                  {...register("PrazoRestante")}
                 />
               </BoxInput>
               <BoxInput>
-                <TextInput>Saldo real</TextInput>
+                <Text mt={'20px'} mb={'10px'}>Saldo real</Text>
                 <Input
                   bg={"yellow.100"}
                   type="text"
                   placeholder="Saldo real"
                   borderRadius={5}
-                  {...register('VlEmprestimo')}
+                  {...register("VlEmprestimo")}
                 />
               </BoxInput>
               <BoxInput>
-                <TextInput>Taxa atual</TextInput>
+                <Text mt={'20px'} mb={'10px'}>Taxa atual</Text>
                 <Flex
                   justify={"center"}
                   align={"center"}
                   bg={"blue.200"}
                   h={"40px"}
                   borderRadius={5}
-                  {...register('TaxaAtual')}
+                  {...register("TaxaAtual")}
                 >
-                  {taxaResponse !== 100 &&
-                  <Text>{taxaResponse}</Text>
-                 
-                }
+                  {taxaResponse !== 100 && <Text>{taxaResponse}</Text>}
                 </Flex>
               </BoxInput>
-              <Button type="submit" gap={2} bg={'#074173'} color={'white'} _hover={{
-                background: '#073173'
-              }}><Icon as={CiCalculator1 }/>Calcular</Button>
+              <Flex gap={2} mt={'20px'}>
+                <Button
+                  type="submit"
+                  bg={"#074173"}
+                  color={"white"}
+                  _hover={{ background: "#073173" }}
+                >
+                  <Icon as={CiCalculator1} />
+                  Calcular
+                </Button>
+                <Button
+                  type="button"
+                  bg={"#9CA3AF"}
+                  color={"white"}
+                  _hover={{ background: "#6B7280" }}
+                  onClick={handleClearForm}
+                >
+                  Limpar
+                </Button>
+              </Flex>
             </FormBox>
           </form>
-
         </Flex>
       </Box>
     </Flex>
   );
-};
+}
