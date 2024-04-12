@@ -243,7 +243,7 @@ export const Portabilidade = ({taxa}:any) => {
             <ModalBody>
               <Grid templateColumns={"repeat(3, 1fr)"} gap={6}>
                 <GridItem>
-                  <Box bg={'blue.500'} color={'white'} p={2}>
+                  <Box borderRadius={'14px'} bg={'blue.500'} color={'white'} p={2}>
                     <Box>
                       <Text fontSize={'xl'} fontWeight={'650'}>Contrato Atual</Text>
                     </Box>
@@ -277,7 +277,7 @@ export const Portabilidade = ({taxa}:any) => {
                   </Box>
                 </GridItem>
                 <GridItem>
-                <Box bg={'blue.500'} color={'white'} p={2}>
+                <Box borderRadius={'14px'} bg={'blue.500'} color={'white'} p={2}>
                     <Box>
                       <Text fontSize={'xl'} fontWeight={'650'}>Novo contrato</Text>
                     </Box>
@@ -307,7 +307,7 @@ export const Portabilidade = ({taxa}:any) => {
                   </Box>
                 </GridItem>
                 <GridItem>
-                <Box bg={'blue.500'} color={'white'} p={2}>
+                <Box borderRadius={'14px'} bg={'blue.500'} color={'white'} p={2}>
                     <Box>
                       <Text fontSize={'xl'} fontWeight={'650'}>Economia do cliente</Text>
                     </Box>

@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FaTrash } from "react-icons/fa";
 
 export function RealBalance({ taxaares }: any) {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
@@ -164,13 +165,14 @@ export function RealBalance({ taxaares }: any) {
                   Calcular
                 </Button>
                 <Button
+               
                   type="button"
                   bg={"#9CA3AF"}
                   color={"white"}
                   _hover={{ background: "#6B7280" }}
                   onClick={handleClearForm}
                 >
-                  Limpar
+                 <Icon as={FaTrash }/> Limpar
                 </Button>
               </Flex>
             </FormBox>

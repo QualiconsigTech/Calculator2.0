@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CiCalculator1 } from "react-icons/ci";
+import { FaTrash } from "react-icons/fa";
 
 export function BalanceDataSystem({ taxaatual }: any) {
   const { inbursatax, setInbursaTax } = useInbursaContextHook();
@@ -195,7 +196,10 @@ export function BalanceDataSystem({ taxaatual }: any) {
                 <Icon as={CiCalculator1} />
                 Calcular
               </Button>
-              <Button onClick={handleClearForm}>Limpar</Button>
+              <Button gap={2}  type="button"
+                  bg={"#9CA3AF"}
+                  color={"white"}
+                  _hover={{ background: "#6B7280" }} onClick={handleClearForm}><Icon as={FaTrash }/>Limpar</Button>
             </FormBox>
           </form>
         </Flex>

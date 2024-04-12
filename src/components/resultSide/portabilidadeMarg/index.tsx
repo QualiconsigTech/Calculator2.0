@@ -29,12 +29,13 @@
     useMediaQuery,
   } from "@chakra-ui/react";
   import Image from "next/image";
-  import { useEffect, useState } from "react";
+  import { useEffect, useRef, useState } from "react";
   import qualiconsi from "../../../../public/qualiconsi.png";
   import { FaBuilding, FaPercent, FaPhoneAlt } from "react-icons/fa";
   import { MdOutlineMail } from "react-icons/md";
   import { TbCurrencyReal } from "react-icons/tb";
   import { PiBankFill } from "react-icons/pi";
+import html2canvas from "html2canvas";
 
   export const PortabilidadeMarg = ({taxa}:any) => {
     const [isMobile] = useMediaQuery("(max-width: 768px)");
@@ -43,6 +44,12 @@
     const [selectedRow, setSelectedRow] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [isCapturing, setIsCapturing] = useState<boolean>(false);
+    const [screentext, setScreenText] = useState<string>("");
+
+    const captureRef = useRef<HTMLDivElement>(null);
+
+   
 
     useEffect(() => {
       if (inbursatax) {
@@ -219,7 +226,7 @@
           )}
         
         </Table>
-        <Modal isOpen={isOpen} onClose={onClose} size="6xl">
+        <Modal isOpen={isOpen} onClose={onClose} size="6xl" >
           <ModalOverlay />
           <ModalContent
             borderRadius={"14px"}
@@ -229,6 +236,7 @@
             <Box
               borderRadius={"14px"}
               bgGradient="linear(to-r, #87CEEB ,#1E90FF )"
+              ref={captureRef}
             >
               <ModalHeader
                 fontSize="2xl"
@@ -245,7 +253,7 @@
               <ModalBody>
                 <Grid templateColumns={"repeat(3, 1fr)"} gap={6}>
                   <GridItem>
-                    <Box bg={'blue.500'} color={'white'} p={2}>
+                    <Box bg={'blue.500'} color={'white'} p={2} borderRadius={'14px'}>
                       <Box>
                         <Text fontSize={'xl'} fontWeight={'650'}>Contrato Atual</Text>
                       </Box>
@@ -260,7 +268,7 @@
                         }
                         
                         </Flex>
-                      <Flex gap={2} mt={2} mb={2}>
+                      <Flex gap={2} mt={2} mb={2} >
                         <Text fontSize={'14px'} flex={2}>Saldo devedor aproximado :</Text>
                         <Flex gap={2} align="center" flex={1}><Icon as={TbCurrencyReal}/>{FormatedNumber(selectedRow?.valorPresent)}</Flex>
                       </Flex>
@@ -279,7 +287,7 @@
                     </Box>
                   </GridItem>
                   <GridItem>
-                  <Box bg={'blue.500'} color={'white'} p={2}>
+                  <Box borderRadius={'14px'} bg={'blue.500'} color={'white'} p={2}>
                       <Box>
                         <Text fontSize={'xl'} fontWeight={'650'}>Novo contrato</Text>
                       </Box>
@@ -309,7 +317,7 @@
                     </Box>
                   </GridItem>
                   <GridItem>
-                  <Box bg={'blue.500'} color={'white'} p={2}>
+                  <Box borderRadius={'14px'} bg={'blue.500'} color={'white'} p={2}>
                       <Box>
                         <Text fontSize={'xl'} fontWeight={'650'}>Economia do cliente</Text>
                       </Box>
@@ -338,12 +346,12 @@
                   </Flex>
                   <Flex gap={2} alignItems={"center"}>
                     <Icon as={MdOutlineMail} textAlign={"center"} />
-                  
+                      <Text color={'black'} fontWeight={650}>Email </Text>
                     <Text>contato@qualiconsig.com.br</Text>
                   </Flex>
                   <Flex gap={2} alignItems={"center"}>
                     <Icon as={FaBuilding} />
-                    <Text textAlign={"center"}>CNPJ</Text>
+                    <Text textAlign={"center"} fontWeight={650} color={'black'}>CNPJ</Text>
                     <Text textAlign={"center"}>27.733.374/0001-72</Text>
                   </Flex>
                   
@@ -354,6 +362,7 @@
                 </Flex>
               </ModalFooter>
             </Box>
+           
           </ModalContent>
         </Modal>
       </Flex>
