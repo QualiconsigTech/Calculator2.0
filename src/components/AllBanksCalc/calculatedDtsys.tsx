@@ -7,7 +7,7 @@ export const InbursaDataSystem = (
   SaldoDevedor: any,
   parcelasPagas: any
 ) => {
-  const taxas = [1.45, 1.54, 1.58, 1.68, 1.78];
+  const taxas = [1.34, 1.38, 1.42, 1.48, 1.52, 1.58, 1.64];
   const InbursaCalc = new CalculadoraGeral(taxas);
   const taxacalc = InbursaCalc.calcularTaxa(parcelaAtual,
     parcelaRestante,
