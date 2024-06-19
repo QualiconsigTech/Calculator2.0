@@ -44,7 +44,7 @@ export const PagbankDataSystem = (
   SaldoDevedor: any,
   parcelasPagas: any
 ) => {
-  const taxas = [1.72, 1.70, 1.66, 1.60, 1.56];
+  const taxas = [1.60, 1.64]
   const PagbankCalc = new CalculadoraGeral(taxas);
   const taxacalc = PagbankCalc.calcularTaxa(parcelaAtual,
     parcelaRestante,

@@ -36,7 +36,7 @@ export const CalculadoraInbursa = (parcelaAtual:any, parcelaRestante:any, SaldoD
 
 export const CalculadoraPagBank = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor:any) =>{
 
-  const taxas = [1.72, 1.70, 1.66, 1.60, 1.56]
+  const taxas = [1.60, 1.64]
         const pagbankCalc = new CalculadoraGeral(taxas)
         const taxaPagbank = pagbankCalc.calcularTaxa(
           parcelaAtual,
