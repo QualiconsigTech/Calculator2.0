@@ -61,7 +61,7 @@ export class BaseDeCalculo {
     taxaResponse: any
   ) {
     const c6Taxas = [1.55, 1.6, 1.65, 1.7, 1.75];
-    const c6Coeficientes = [0.2250000, 0.02290000, 0.02352000, 0.02330000, 0.02360000]
+    const c6Coeficientes = [0.02250000, 0.02290000, 0.02352000, 0.02330000, 0.02360000]
     const calculadoraC6 = new CalculadoraRefinanciamento(c6Taxas, taxaResponse);
     const resultadosC6 = calculadoraC6.calcularRefinanciamento(
       parcelaAtual,
