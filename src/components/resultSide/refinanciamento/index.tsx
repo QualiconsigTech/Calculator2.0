@@ -366,6 +366,9 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
                   CNPJ: 27.733.374/0001-72
                 </Button>
               </HStack>
+              <Box bg={'yellow.300'} mt='20px' borderRadius={'14px'} p={'2'}>
+                <Text textAlign={'center'} color={'gray.700'}>Valores do novo contrato aproximado, sujeitos a alteração, pois, dependem 100% do saldo devedor real que será enviado pelo seu Banco originador (Atual)</Text>
+              </Box>
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={onClose}>
