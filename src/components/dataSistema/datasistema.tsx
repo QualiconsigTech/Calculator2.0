@@ -18,8 +18,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaTrash } from "react-icons/fa";
+import { BaseDeCalculo } from "../resultSide/refinanciamento/refinCalc";
 
-export function RealBalance({taxaares}:any) {
+export function RealBalance({taxaares, selectedRefin, selectedPort}:any) {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const { inbursatax, setInbursaTax } = useInbursaContextHook();
 
@@ -31,40 +32,52 @@ export function RealBalance({taxaares}:any) {
   } = useForm<any>();
   const [formData, setFormData] = useState<saldoReal | any>();
   const [taxaResponse, setTaxaResponse] = useState<number>();
+
   const onSubmit: SubmitHandler<any> = async (data: saldoReal) => {
     setFormData(data);
   };
 
-  const FormReceived = () => {
-    const parcelaAtual = formData?.ValorParcelaAtual?.toString().replace('.', '');
-    const valorEmprestimo = formData?.VlEmprestimo?.toString().replace('.', '');
-    const InbursaResponse = CalculadoraInbursa(
-      parseFloat(parcelaAtual!),
-      formData?.PrazoRestante,
-      parseFloat(valorEmprestimo!)
-    );
-    const PagBankResponse = CalculadoraPagBank(
-      parseFloat(parcelaAtual!),
-      formData?.PrazoRestante,
-      parseFloat(valorEmprestimo!)
-    );
-    const C6Response = CalculadoraC6(
-      parseFloat(parcelaAtual!),
-      formData?.PrazoRestante,
-      parseFloat(valorEmprestimo!)
-    );
-    const taxaResponse = CalcularTaxa(
-      parseFloat(parcelaAtual!),
-      formData?.PrazoRestante,
-      parseFloat(valorEmprestimo!)
-    );
-    setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
-    setTaxaResponse(taxaResponse);
-    taxaares(taxaResponse);
-  };
+  const selectedTypeSearch = async () => {
+    if (!formData) return;
+
+    const parcelaAtual = parseFloat(formData?.ValorParcelaAtual?.toString().replace(',', '.'));
+    const valorEmprestimo = parseFloat(formData?.VlEmprestimo?.toString().replace(',', '.'));
+    const prazoRestante = parseInt(formData?.PrazoRestante, 10);
+
+    if (isNaN(parcelaAtual) || isNaN(valorEmprestimo) || isNaN(prazoRestante)) {
+      console.error('Invalid input values');
+      return;
+    }
+
+    if (selectedRefin == true) {
+      setInbursaTax({})
+      setTaxaResponse(0);
+      taxaares();
+      const taxaResponse = CalcularTaxa(parcelaAtual, prazoRestante, valorEmprestimo);
+      // const InbursaResponse = BaseDeCalculo.inbursaCalculator(parcelaAtual, prazoRestante, valorEmprestimo, taxaResponse);
+      const PagBankResponse = BaseDeCalculo.pagbankCalculator(parcelaAtual, prazoRestante, valorEmprestimo, taxaResponse);
+      const C6Response = BaseDeCalculo.c6Calculator(parcelaAtual, prazoRestante, valorEmprestimo, taxaResponse);
+      
+      setTaxaResponse(taxaResponse);
+      taxaares(taxaResponse);
+      setInbursaTax({PagBankResponse, C6Response });
+    }
+
+    if (selectedPort) {
+      setInbursaTax({})
+      const InbursaResponse = CalculadoraInbursa(parcelaAtual, prazoRestante, valorEmprestimo);
+      const PagBankResponse = CalculadoraPagBank(parcelaAtual, prazoRestante, valorEmprestimo);
+      const C6Response = CalculadoraC6(parcelaAtual, prazoRestante, valorEmprestimo);
+      const taxaResponse = CalcularTaxa(parcelaAtual, prazoRestante, valorEmprestimo);
+
+      setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
+      setTaxaResponse(taxaResponse);
+      taxaares(taxaResponse);
+    }
+  }
 
   useEffect(() => {
-    FormReceived();
+    selectedTypeSearch();
   }, [formData]);
 
   const handleClearForm = () => {
@@ -72,17 +85,8 @@ export function RealBalance({taxaares}:any) {
     setFormData({});
   };
 
-
   return (
-    <Flex
-      flexDir={"column"}
-      justify={"center"}
-      align={"center"}
-      flex={1}
-      h={isMobile ? "auto" : "100vh"}
-      bg={"#f5f5f5"}
-      p={4}
-    >
+    <Flex flexDir={"column"} justify={"center"} align={"center"} flex={1} h={isMobile ? "auto" : "100vh"} bg={"#f5f5f5"} p={4}>
       <Box mb={5}>
         <Text fontWeight={"600"} fontSize={["17px"]}>
           Simulação calculadora
@@ -91,27 +95,18 @@ export function RealBalance({taxaares}:any) {
       </Box>
       <Flex mb={20} justify={"center"} gap={10}>
         <Link href="realsaldo">
-          <Button
-            bg={"#201658"}
-            color={"white"}
-            _hover={{ bg: "#3F3D56" }}
-          >
+          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
             Dados Sistema 
           </Button>
         </Link>
         <Link href="sistemaDado">
-          <Button
-            bg={"#201658"}
-            color={"white"}
-            _hover={{ bg: "#3F3D56" }}
-          >
+          <Button bg={"#201658"} color={"white"} _hover={{ bg: "#3F3D56" }}>
             Saldo Real
           </Button>
         </Link>
       </Flex>
       <Box bg={"#FFFFFF"} p={10} borderRadius={10} boxShadow={"md"} w={"100%"}>
         <Flex justify={"center"} align={"center"}>
-
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormBox>
               <BoxInput>
@@ -146,29 +141,18 @@ export function RealBalance({taxaares}:any) {
               </BoxInput>
               <BoxInput>
                 <Text mb='10px' mt={'10px'}>Taxa atual</Text>
-                <Flex
-                  justify={"center"}
-                  
-                  align={"center"}
-                  bg={"blue.200"}
-                  h={"40px"}
-                  borderRadius={5}
-                  {...register('TaxaAtual')}
-                >
-                  {taxaResponse !== 100 &&
-                  <Text>{taxaResponse}</Text>
-                 
-                }
+                <Flex justify={"center"} align={"center"} bg={"blue.200"} h={"40px"} borderRadius={5} {...register('TaxaAtual')}>
+                  {taxaResponse !== 100 && <Text>{taxaResponse}</Text>}
                 </Flex>
               </BoxInput>
-              <Button mt={'10px'} type="submit" gap={2} bg={'#074173'} color={'white'} _hover={{
-                background: '#073173'
-              }}><Icon as={CiCalculator1 }/>Calcular</Button>
+              <Button mt={'10px'} type="submit" gap={2} bg={'#074173'} color={'white'} _hover={{ background: '#073173' }}>
+                <Icon as={CiCalculator1 }/>Calcular
+              </Button>
               <Button gap={2} mt={'10px'} onClick={handleClearForm}>
-                <Icon as={FaTrash }/>Limpar</Button>
+                <Icon as={FaTrash }/>Limpar
+              </Button>
             </FormBox>
           </form>
-
         </Flex>
       </Box>
     </Flex>

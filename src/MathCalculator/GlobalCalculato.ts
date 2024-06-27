@@ -7,7 +7,6 @@ export class CalculadoraGeral {
   }
 
   private parseNumber(value: any): number {
-    // Verifica se o valor é uma string e substitui a vírgula pelo ponto
     if (typeof value === "string") {
       return parseFloat(value.replace(",", "."));
     }
