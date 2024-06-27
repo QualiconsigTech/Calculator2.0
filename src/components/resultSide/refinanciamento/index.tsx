@@ -1,5 +1,7 @@
 import { useInbursaContextHook } from "@/Context/InbursaContext";
 import { FormatedNumber } from "@/utils/formatNumbersFunction/formatNumbers";
+import { HiMiniBuildingOffice2 } from "react-icons/hi2";
+
 import {
   Box,
   Button,
@@ -44,6 +46,7 @@ interface RefinanciamentoData {
   parcela: number;
   saldoDevedor: number;
   parcelaAtual: number;
+  taxaAntiga: number
 }
 
 export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
@@ -67,10 +70,11 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
           banco: bankName,
           taxa: item.taxa,
           troco: item.troco,
-          prazo: 36, // Adjust prazo if needed
+          taxaAntiga: item.taxaAntiga,
+          prazo: 84, // Adjust prazo if needed
           parcela: item.novaParcela,
           saldoDevedor: item.saldoDevedor,
-          parcelaAtual: 1000, // Adjust parcelaAtual if needed
+          parcelaAtual: item.novaParcela, // Adjust parcelaAtual if needed
         }));
       };
 
@@ -257,7 +261,7 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
                       </Text>
                       <Flex gap={2} align="center" flex={1}>
                         <Icon as={TbCurrencyReal} />
-                        <Text fontSize="md">{FormatedNumber(1000)}</Text>
+                        <Text fontSize="md">{FormatedNumber(selectedRow?.parcelaAtual || 0)}</Text>
                       </Flex>
                     </Flex>
                     <Flex gap={2} mb={2}>
@@ -274,7 +278,7 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
                         Taxa de Juros :
                       </Text>
                       <Flex gap={2} align="center" flex={1}>
-                        <Text fontSize="md">1.97%</Text>
+                        <Text fontSize="md">{selectedRow?.taxaAntiga || 0}</Text>
                       </Flex>
                     </Flex>
                   </Box>
@@ -324,15 +328,8 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
                       </Text>
                     </Box>
                     <Flex gap={2} mt={2} mb={2}>
-                      <Text fontSize="14px" flex={2}>
-                        Redução da parcela:
-                      </Text>
-                      <Flex gap={2} align="center" flex={1}>
-                        <Icon as={TbCurrencyReal} />
-                        <Text fontSize="md">
-                          {FormatedNumber(1000 - (selectedRow?.parcela || 0))}
-                        </Text>
-                      </Flex>
+                      
+                      
                     </Flex>
                     <Flex gap={2} mb={2}>
                       <Text fontSize="14px" flex={2}>
@@ -352,14 +349,21 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
                   leftIcon={<FaPhoneAlt />}
                   onClick={onClose}
                 >
-                  Ligar
+                  Contato: 0800-888-5842
                 </Button>
                 <Button
                   colorScheme="green"
                   leftIcon={<MdOutlineMail />}
                   onClick={onClose}
                 >
-                  Enviar E-mail
+                  Enviar E-mail: contato@qualiconsig.com.br
+                </Button>
+                <Button
+                  colorScheme="yellow"
+                  leftIcon={<HiMiniBuildingOffice2 />}
+                  onClick={onClose}
+                >
+                  CNPJ: 27.733.374/0001-72
                 </Button>
               </HStack>
             </ModalBody>

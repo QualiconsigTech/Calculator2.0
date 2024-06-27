@@ -11,11 +11,9 @@ export default function Calculatortwo() {
     function tax(data:any) {
        setTaxaAtual(data)
     }
-
     return (
         <Box>
-            <Flex flexDir={['column', 'column', 'column', 'row']}>
-               
+            <Flex flexDir={['column', 'column', 'column', 'row']}>          
                 <BalanceDataSystem taxaatual={tax} />
                 <PortabilidadeMarg taxa={taxaAtual}/>
             </Flex>
