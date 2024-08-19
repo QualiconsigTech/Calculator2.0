@@ -83,8 +83,6 @@ export const CalculadoraC6 = (parcelaAtual:any, parcelaRestante:any, SaldoDevedo
 
 
 export const CalcularTaxa = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor:any) => {
-
-
   const taxas = [ 1.45, 1.54, 1.58 , 1.68 ,1.78]
   const TaxaCalculator = new CalculadoraGeral(taxas)
   const TaxaCalc = TaxaCalculator.calcularTaxa(
@@ -93,13 +91,10 @@ export const CalcularTaxa = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor
     -SaldoDevedor,
     1e-6
   )
-  
   const pmt = TaxaCalculator.calcularPMT(
       SaldoDevedor,
       parcelaRestante
   )
- 
-  
   const objInbursaPmt = {
     nameBank: 'Inbursa',
     taxas,
@@ -108,9 +103,31 @@ export const CalcularTaxa = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor
     parcelaRestante,
     SaldoDevedor
   };
- 
   return TaxaCalc
+}
 
+export const CalculadoraQualiBank = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor:any) =>{
 
+  const taxas = [1.64, 1.62,1.60,1.58, 1.56, 1.54, 1.52, 1.50, 1.48]
+        const qualibank = new CalculadoraGeral(taxas)
+        const taxaBank = qualibank.calcularTaxa(
+          parcelaAtual,
+          parcelaRestante,
+          -SaldoDevedor,
+          1e-6
+        );
+        const pmt = qualibank.calcularPMT(SaldoDevedor, parcelaRestante)
+        
 
+        const objQuali = {
+          nameBank: 'QualiBank',
+          taxas,
+          pmt,
+          parcelaAtual,
+          parcelaRestante,
+          SaldoDevedor
+        };
+
+        return objQuali
+        
 }

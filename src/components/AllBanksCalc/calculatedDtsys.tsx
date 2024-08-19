@@ -150,3 +150,40 @@ export const CalcularTaxaSystem = (parcelaAtual:any, parcelaRestante:any, SaldoD
 
 
 }
+
+export const QualiDataSystem = (
+  parcelaAtual: any,
+  parcelaRestante: any,
+  SaldoDevedor: any,
+  parcelasPagas: any
+) => {
+  const taxas = [1.64, 1.60, 1.56, 1.52, 1.48]
+  const PagbankCalc = new CalculadoraGeral(taxas);
+  const taxacalc = PagbankCalc.calcularTaxa(parcelaAtual,
+    parcelaRestante,
+    -SaldoDevedor,
+    1e-6)
+
+  const subParcela = parcelaRestante - parcelasPagas
+  console.log(subParcela)
+  const rate = taxacalc / 100
+  
+  const valorPresent = pv(rate, subParcela, -parcelaAtual)
+  const valorPresenteFix = valorPresent.toFixed(2)
+
+  const pmt = PagbankCalc.calcularPMTComParcelasPagas(
+    valorPresenteFix,
+    parcelaRestante,
+    parcelasPagas
+  );
+  return {
+    nameBank: "QualiBank",
+    taxas,
+    pmt,
+    parcelaAtual,
+    parcelaRestante,
+    SaldoDevedor,
+    valorPresent,
+    parcelasPagas
+  };
+};

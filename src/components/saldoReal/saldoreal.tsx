@@ -5,6 +5,7 @@ import {
   CalcularTaxaSystem,
   InbursaDataSystem,
   PagbankDataSystem,
+  QualiDataSystem,
 } from "../AllBanksCalc/calculatedDtsys";
 import { saldoDataSyst, saldoReal } from "../../types/SaldoReal/saldoReal";
 import { BoxInput, TextInput } from "../../utils/formBox/boxInput";
@@ -53,13 +54,19 @@ export function BalanceDataSystem({ taxaatual }: any) {
         parseFloat(valorEmprestimo!),
         formData?.parcelasPagas
       );
+      const QualiBank = QualiDataSystem(
+        parseFloat(parcelaAtual!),
+        formData?.prazoInicial,
+        parseFloat(valorEmprestimo!),
+        formData?.parcelasPagas
+      );
       const taxaResponse = CalcularTaxaSystem(
         parseFloat(parcelaAtual!),
         formData?.prazoInicial,
         parseFloat(valorEmprestimo!),
         formData?.parcelasPagas
       );
-      setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
+      setInbursaTax({ InbursaResponse, PagBankResponse, C6Response, QualiBank });
       setTaxaResponse(taxaResponse);
       taxaatual(taxaResponse);
     }

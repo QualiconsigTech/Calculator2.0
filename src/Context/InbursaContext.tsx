@@ -3,7 +3,8 @@ import { createContext, useContext, useState } from "react";
 export interface NameProps {
     InbursaResponse: any,
     PagBankResponse: any,
-    C6Response: any
+    C6Response: any,
+    QualiBank:any
 }
 
 interface MathContextProps {

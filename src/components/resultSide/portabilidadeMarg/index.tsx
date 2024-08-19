@@ -56,8 +56,9 @@ import html2canvas from "html2canvas";
         const inbursa = inbursatax?.InbursaResponse;
         const pagbank = inbursatax?.PagBankResponse;
         const c6 = inbursatax?.C6Response;
+        const qualibank = inbursatax?.QualiBank
 
-        const allbank = [inbursa, pagbank, c6].filter(Boolean);
+        const allbank = [inbursa, pagbank, c6, qualibank].filter(Boolean);
 
         const formattedData: any[] = [];
         allbank.forEach((element: any) => {
@@ -93,6 +94,10 @@ import html2canvas from "html2canvas";
           return "#b094e6";
         case "C6":
           return "#1e1e20";
+        case "qualibank":
+          return "#0f0fdc";
+        case "QualiBank":
+          return "#0f0fdc"
         default:
           return "white";
       }
@@ -139,6 +144,7 @@ import html2canvas from "html2canvas";
             >
               Pagbank
             </ListItem>
+            
             <ListItem
               color={selectedBank === "C6" ? "black" : "white"}
               cursor="pointer"
@@ -146,6 +152,14 @@ import html2canvas from "html2canvas";
               fontWeight={650}
             >
               C6
+            </ListItem>
+            <ListItem
+              color={selectedBank === "QualiBank" ? "#00ff" : "white"}
+              cursor="pointer"
+              onClick={() => handleBankSelect("QualiBank")}
+              fontWeight={650}
+            >
+              QualiBank
             </ListItem>
           </List>
         </Flex>

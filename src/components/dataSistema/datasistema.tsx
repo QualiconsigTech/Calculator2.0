@@ -1,5 +1,5 @@
 import { useInbursaContextHook } from "../../Context/InbursaContext";
-import { CalculadoraC6, CalculadoraInbursa, CalculadoraPagBank, CalcularTaxa } from "../AllBanksCalc/calculated";
+import { CalculadoraC6, CalculadoraInbursa, CalculadoraPagBank, CalculadoraQualiBank, CalcularTaxa } from "../AllBanksCalc/calculated";
 import { saldoReal } from "../../types/SaldoReal/saldoReal";
 import { BoxInput, TextInput } from "../../utils/formBox/boxInput";
 import { FormBox } from "../../utils/formBox/formBox";
@@ -57,10 +57,11 @@ export function RealBalance({taxaares, selectedRefin, selectedPort}:any) {
       // const InbursaResponse = BaseDeCalculo.inbursaCalculator(parcelaAtual, prazoRestante, valorEmprestimo, taxaResponse);
       const PagBankResponse = BaseDeCalculo.pagbankCalculator(parcelaAtual, prazoRestante, valorEmprestimo, taxaResponse);
       const C6Response = BaseDeCalculo.c6Calculator(parcelaAtual, prazoRestante, valorEmprestimo, taxaResponse);
-      
+      const QualiBank = BaseDeCalculo.CalculadoraQualiBank(parcelaAtual, prazoRestante,valorEmprestimo, taxaResponse )
+
       setTaxaResponse(taxaResponse);
       taxaares(taxaResponse);
-      setInbursaTax({PagBankResponse, C6Response });
+      setInbursaTax({PagBankResponse, C6Response, QualiBank });
     }
 
     if (selectedPort) {
@@ -69,8 +70,9 @@ export function RealBalance({taxaares, selectedRefin, selectedPort}:any) {
       const PagBankResponse = CalculadoraPagBank(parcelaAtual, prazoRestante, valorEmprestimo);
       const C6Response = CalculadoraC6(parcelaAtual, prazoRestante, valorEmprestimo);
       const taxaResponse = CalcularTaxa(parcelaAtual, prazoRestante, valorEmprestimo);
+      const QualiBank = CalculadoraQualiBank(parcelaAtual, prazoRestante,valorEmprestimo )
 
-      setInbursaTax({ InbursaResponse, PagBankResponse, C6Response });
+      setInbursaTax({ InbursaResponse, PagBankResponse, C6Response, QualiBank });
       setTaxaResponse(taxaResponse);
       taxaares(taxaResponse);
     }

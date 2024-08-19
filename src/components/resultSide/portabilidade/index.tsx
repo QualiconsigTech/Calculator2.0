@@ -49,8 +49,9 @@ export const Portabilidade = ({taxa}:any) => {
       const inbursa = inbursatax?.InbursaResponse;
       const pagbank = inbursatax?.PagBankResponse;
       const c6 = inbursatax?.C6Response;
+      const qualibank = inbursatax?.QualiBank;
 
-      const allbank = [inbursa, pagbank, c6].filter(Boolean);
+      const allbank = [inbursa, pagbank, c6, qualibank].filter(Boolean);
 
       const formattedData: any[] = [];
       allbank.forEach((element: any) => {
@@ -85,7 +86,11 @@ export const Portabilidade = ({taxa}:any) => {
         return "#b094e6";
       case "C6":
         return "#1e1e20";
-      default:
+      case "QualiBank":
+        return "#0b0be5";
+      case "qualibank":
+        return "#0b0be5";
+        default:
         return "white";
     }
   };
@@ -138,6 +143,14 @@ export const Portabilidade = ({taxa}:any) => {
             fontWeight={650}
           >
             C6
+          </ListItem>
+          <ListItem
+            color={selectedBank === "QualiBank" ? "#0d0ddccc" : "white"}
+            cursor="pointer"
+            onClick={() => handleBankSelect("QualiBank")}
+            fontWeight={650}
+          >
+            QualiBank
           </ListItem>
         </List>
       </Flex>

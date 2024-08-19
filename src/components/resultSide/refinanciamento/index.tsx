@@ -63,7 +63,9 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
       const inbursa = inbursatax?.InbursaResponse?.data?.dados;
       const pagbank = inbursatax?.PagBankResponse?.data?.dados;
       const c6 = inbursatax?.C6Response?.data?.dados;
-      console.log(inbursatax)
+      const qualibank = inbursatax?.QualiBank?.data?.dados;
+      console.log('c6', c6)
+      console.log('quali', qualibank)
       const processBankData = (bankData: any, bankName: string): RefinanciamentoData[] => {
         if (!bankData) return [];
         return bankData.map((item: any) => ({
@@ -82,6 +84,7 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
         ...processBankData(inbursa, "Inbursa"),
         ...processBankData(pagbank, "Pagbank"),
         ...processBankData(c6, "C6"),
+        ...processBankData(qualibank, "QualiBank")
       ];
 
       allbank.sort((a, b) => a.taxa - b.taxa);
@@ -97,6 +100,8 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
         return "#b094e6";
       case "C6":
         return "#1e1e20";
+      case "QualiBank":
+        return "#0a0add"
       default:
         return "white";
     }
@@ -147,6 +152,14 @@ export const RefinanciamentoCalc = ({ taxa }: { taxa: any }) => {
             fontWeight={650}
           >
             C6
+          </ListItem>
+          <ListItem
+            color={selectedRow?.banco === "QualiBank" ? "#00ff" : "white"}
+            cursor="pointer"
+            onClick={() => handleBankSelect("QualiBank")}
+            fontWeight={650}
+          >
+            QualiBank
           </ListItem>
         </List>
       </Flex>
