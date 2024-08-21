@@ -108,7 +108,7 @@ export const CalcularTaxa = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor
 
 export const CalculadoraQualiBank = (parcelaAtual:any, parcelaRestante:any, SaldoDevedor:any) =>{
 
-  const taxas = [1.64, 1.62,1.60,1.58, 1.56, 1.54, 1.52, 1.50, 1.48]
+  const taxas = [1.64, 1.60, 1.56, 1.52, 1.48]
         const qualibank = new CalculadoraGeral(taxas)
         const taxaBank = qualibank.calcularTaxa(
           parcelaAtual,
