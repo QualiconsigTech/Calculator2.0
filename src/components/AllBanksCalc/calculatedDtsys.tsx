@@ -152,30 +152,29 @@ export const CalcularTaxaSystem = (parcelaAtual:any, parcelaRestante:any, SaldoD
 }
 
 export const QualiDataSystem = (
-  parcelaAtual: any,
-  parcelaRestante: any,
-  SaldoDevedor: any,
-  parcelasPagas: any
+  parcelaAtual: number,
+  parcelaRestante: number,
+  SaldoDevedor: number,
+  parcelasPagas: number
 ) => {
-  const taxas = [1.64, 1.60, 1.56, 1.52, 1.48]
-  const PagbankCalc = new CalculadoraGeral(taxas);
-  const taxacalc = PagbankCalc.calcularTaxa(parcelaAtual,
-    parcelaRestante,
-    -SaldoDevedor,
-    1e-6)
+  const taxas = [1.64, 1.60, 1.56, 1.52, 1.48];
+  const coeficiente = [0.022, 0.0217, 0.0214, 0.0212, 0.0209];
+  const acrescimos = { 1.64: 0.08, 1.60: 0.08, 1.56: 0.06, 1.52: 0.06, 1.48: 0.06 };
 
-  const subParcela = parcelaRestante - parcelasPagas
-  console.log(subParcela)
-  const rate = taxacalc / 100
-  
-  const valorPresent = pv(rate, subParcela, -parcelaAtual)
-  const valorPresenteFix = valorPresent.toFixed(2)
-
+  const PagbankCalc = new CalculadoraGeral(taxas, coeficiente, acrescimos);
+  const taxacalc = PagbankCalc.calcularTaxa(parcelaAtual, parcelaRestante, -SaldoDevedor, 1e-6);
+  console.log('Taxa Calculada:', taxacalc);
+  const subParcela = parcelaRestante - parcelasPagas;
+  const rate = taxacalc / 100;
+  const valorPresent = pv(rate, subParcela, -parcelaAtual);
+  console.log('Valor Presente:', valorPresent);
+  const valorPresenteFix = parseFloat(valorPresent.toFixed(2));
   const pmt = PagbankCalc.calcularPMTComParcelasPagas(
     valorPresenteFix,
     parcelaRestante,
     parcelasPagas
   );
+  
   return {
     nameBank: "QualiBank",
     taxas,
@@ -183,7 +182,8 @@ export const QualiDataSystem = (
     parcelaAtual,
     parcelaRestante,
     SaldoDevedor,
-    valorPresent,
+    valorPresent: valorPresenteFix,
     parcelasPagas
   };
 };
+

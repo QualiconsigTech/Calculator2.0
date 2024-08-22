@@ -1,9 +1,13 @@
 export class CalculadoraGeral {
   taxas: number[];
-  taxa : number | any
-  
-  constructor(taxas: any) {
+  taxa: number | any;
+  coeficientes?: number[];
+  acrescimos?: { [key: number]: number }; // Acrescimos por taxa
+
+  constructor(taxas: any, coeficientes?: number[], acrescimos?: { [key: number]: number }) {
     this.taxas = taxas;
+    this.coeficientes = coeficientes;
+    this.acrescimos = acrescimos;
   }
 
   private parseNumber(value: any): number {
@@ -16,8 +20,11 @@ export class CalculadoraGeral {
   calcularPMT(valorPresente: any, numeroParcelas: any): number[] {
     const valorPresenteNumber = this.parseNumber(valorPresente);
     const result: number[] = [];
-    this.taxas.forEach((taxa: number) => {
-      const tax = this.parseNumber(taxa) + 0.05;
+    this.taxas.forEach((taxa: number, index: number) => {
+      const taxAdjust = this.coeficientes?.[index] || 0;
+      const taxBase = this.parseNumber(taxa);
+      const acrescimo = this.acrescimos?.[taxBase] || 0; // Acrescimo se existir
+      const tax = taxBase + taxAdjust + acrescimo;
       const tx = tax / 100;
       let total =
         (valorPresenteNumber * tx) / (1 - Math.pow(1 + tx, -numeroParcelas));
@@ -65,7 +72,7 @@ export class CalculadoraGeral {
       }
     }
     const taxaAtual = taxaMin * 100;
-    this.taxa = taxaAtual.toFixed(2) 
+    this.taxa = taxaAtual.toFixed(2);
     return parseFloat(taxaAtual.toFixed(2));
   }
 
@@ -74,11 +81,13 @@ export class CalculadoraGeral {
     numeroParcelas: any,
     parcelasPagas: number
   ): number[] {
-    
     const valorPresenteNumber = this.parseNumber(valorPresente);
     const result: number[] = [];
-    this.taxas.forEach((taxa: number) => {
-      const tax = this.parseNumber(taxa) + 0.05;
+    this.taxas.forEach((taxa: number, index: number) => {
+      const taxAdjust = this.coeficientes?.[index] || 0;
+      const taxBase = this.parseNumber(taxa);
+      const acrescimo = this.acrescimos?.[taxBase] || 0; // Acrescimo se existir
+      const tax = taxBase + taxAdjust + acrescimo;
       const tx = tax / 100;
       let total =
         (valorPresenteNumber * tx) /
@@ -89,9 +98,17 @@ export class CalculadoraGeral {
     return result;
   }
 
-   calcularVP(nper:number, pmt:number) {
-   const rate = this.taxa
-   const vp = (pmt / rate * (1 - Math.pow(1 + rate, -nper)))
-   return vp
-}
+  calcularVP(nper: number, pmt: number): number {
+    const rate = this.taxa / 100; // Convertendo a taxa para decimal
+    const vp = (pmt / rate) * (1 - Math.pow(1 + rate, -nper));
+    return parseFloat(vp.toFixed(2));
+  }
+
+  calcularPMTSaldoReal(
+    parcelaAtual: number,
+    parcelasRestantes: number,
+    saldoDevedor: number
+  ): number[] {
+    return this.calcularPMT(saldoDevedor, parcelasRestantes);
+  }
 }
